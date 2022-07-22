@@ -5,7 +5,7 @@ import accent from "../../assets/header-right-dots (1).svg";
 const Home = () => {
   return (
     <div className="bg-neu-white">
-      <div className="flex relative z-20 justify-between max-w-xs sm:max-w-sm md:max-w-lg lg:max-w-3xl xl:max-w-5xl 2xl:max-w-7xl mx-auto h-screen w-full pt-[30%] md:pt-[10%]">
+      <div className="flex relative z-20 justify-center lg:justify-between max-w-xs sm:max-w-sm md:max-w-lg lg:max-w-3xl xl:max-w-5xl 2xl:max-w-7xl mx-auto h-screen w-full pt-[30%] md:pt-[10%]">
         <div className="relative">
           <div className="text-center md:text-left mb-12">
             <p className="text-5xl md:text-6xl mb-6 font-neu font-light">
