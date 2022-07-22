@@ -20,6 +20,7 @@ module.exports = {
       },
       fontFamily: {
         neu: ['"Roboto"', '"sans-serif"'],
+        logo: ['"Righteous"', '"cursive"'],
       },
     },
   },

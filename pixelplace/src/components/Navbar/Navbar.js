@@ -5,10 +5,10 @@ const Navbar = () => {
   const user = true;
   return (
     <div className="bg-neu-white">
-      <ul className="flex w-full justify-between items-center max-w-md px-6 sm:max-w-lg md:max-w-xl lg:max-w-3xl xl:max-w-5xl 2xl:max-w-7xl mx-auto w-full py-6 font-bold">
+      <ul className="flex justify-between items-center max-w-md px-6 md:px-0 sm:max-w-lg md:max-w-xl lg:max-w-3xl xl:max-w-5xl 2xl:max-w-7xl mx-auto w-full py-6 font-bold">
         <li>
-          <Link className="text-2xl" to="/">
-            PixelPlace
+          <Link className="text-2xl font-logo tracking-wider text-gray-600 hover:text-black duration-200" to="/">
+            <p>PixelPlace</p>
           </Link>
         </li>
         <div className="flex items-center gap-6">
