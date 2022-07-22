@@ -1,13 +1,19 @@
 import { Link } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
+import { useState } from "react";
 
 const Navbar = () => {
   const user = true;
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
   return (
     <div className="bg-neu-white">
       <ul className="flex justify-between items-center max-w-md px-6 md:px-0 sm:max-w-lg md:max-w-xl lg:max-w-3xl xl:max-w-5xl 2xl:max-w-7xl mx-auto w-full py-6 font-bold">
         <li>
-          <Link className="text-2xl font-logo tracking-wider text-gray-600 hover:text-black duration-200" to="/">
+          <Link
+            className="text-2xl font-logo tracking-wider text-[#2e2e2e] hover:text-black duration-200"
+            to="/"
+          >
             <p>PixelPlace</p>
           </Link>
         </li>
@@ -23,11 +29,12 @@ const Navbar = () => {
                 </li>
               </Link>
               <li>
-                <div className="flex -space-x-1 overflow-hidden">
+                <div className="relative flex-col -space-x-1 overflow-hidden">
                   <img
                     className="cursor-pointer inline-block h-10 w-10 rounded-full ring-2 ring-white"
                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt=""
+                    alt="avatar"
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
                   />
                 </div>
               </li>
