@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import homeImg from "../../assets/sport_2.svg";
-import accent from "../../assets/header-right-dots (1).svg";
+import accent from "../../assets/26432.svg";
 
 const Home = () => {
   return (
@@ -11,10 +11,7 @@ const Home = () => {
             <p className="text-5xl md:text-6xl mb-6 font-neu font-light">
               Wonder where <br /> to share{" "}
               <span className="font-extrabold">
-                your{" "}
-                <span className="bg-neu-yellow text-neu-white text-stroke">
-                  art?
-                </span>
+                your <span className="bg-neu-yellow text-neu-white text-stroke">art?</span>
               </span>
             </p>
             <p className="text-xl mb-10">You are at the right place</p>
@@ -33,7 +30,7 @@ const Home = () => {
           </div>
         </div>
         <img
-          className="hidden lg:block absolute right-20 -z-20 w-[600px]"
+          className="hidden 2xl:block absolute right-20 -z-20 w-[600px] xl:w-[600px]"
           src={homeImg}
           alt="homeimg"
         />
