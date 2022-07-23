@@ -18,7 +18,7 @@ const SignUp = () => {
       validationSchema={SignUpSchema}
       onSubmit={(values) => handleSubmit(values)}
     >
-      {({ errors, touched }) => (
+      {({ errors, touched, dirty }) => (
         <Form className="w-full mx-auto  h-screen pt-[100px] max-w-xs sm:max-w-sm md:max-w-lg lg:max-w-3xl">
           <h1 className="text-center text-5xl mb-10 font-logo">Sign Up</h1>
           <div className="flex flex-wrap">
@@ -45,7 +45,7 @@ const SignUp = () => {
             {errors.password && touched.password ? <div>{errors.password}</div> : null}
             <Field
               type="password"
-              name="rePass"
+              name="repass"
               className="border-2 mb-3 w-full outline-none focus:shadow-[4px_4px_2px] duration-150 rounded-md border-neu-black px-2 py-2"
               placeholder="Repeat password"
             />
