@@ -3,7 +3,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { useState } from "react";
 
 const Navbar = () => {
-  const user = false;
+  const user = true;
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   return (
