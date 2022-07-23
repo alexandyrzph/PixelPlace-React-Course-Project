@@ -5,13 +5,16 @@ import accent from "../../assets/header-right-dots (1).svg";
 const Home = () => {
   return (
     <div>
-      <div className="flex relative z-20 justify-center lg:justify-between max-w-xs sm:max-w-sm md:max-w-lg lg:max-w-3xl xl:max-w-5xl 2xl:max-w-7xl mx-auto h-screen w-full pt-[30%] md:pt-[10%]">
+      <div className="flex relative z-20 justify-center lg:justify-between w-full max-w-xs sm:max-w-sm md:max-w-lg lg:max-w-3xl xl:max-w-3xl overflow-ellipsis 2xl:max-w-7xl mx-auto h-screen pt-[30%] md:pt-[10%]">
         <div className="relative">
           <div className="text-center md:text-left mb-12">
             <p className="text-5xl md:text-6xl mb-6 font-neu font-light">
               Wonder where <br /> to share{" "}
               <span className="font-extrabold">
-                your <span className="bg-neu-yellow text-neu-white text-stroke">art?</span>
+                your{" "}
+                <span className="bg-neu-yellow text-neu-white text-stroke">
+                  art?
+                </span>
               </span>
             </p>
             <p className="text-xl mb-10">You are at the right place</p>
@@ -30,7 +33,7 @@ const Home = () => {
           </div>
         </div>
         <img
-          className="hidden lg:block absolute  -right-44 -z-20 w-[800px]"
+          className="hidden lg:block absolute right-20 -z-20 w-[600px]"
           src={homeImg}
           alt="homeimg"
         />
@@ -40,7 +43,7 @@ const Home = () => {
           alt="homeimg"
         />
         <img
-          className="hidden lg:block absolute mb-80 -right-60  -z-20 w-[100px]"
+          className="hidden lg:block absolute mb-80 right-20  -z-20 w-[100px]"
           src={accent}
           alt="homeimg"
         />
