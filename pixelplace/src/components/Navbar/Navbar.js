@@ -3,12 +3,12 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { useState } from "react";
 
 const Navbar = () => {
-  const user = true;
+  const user = false;
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   return (
     <div className="bg-neu-white">
-      <ul className="flex justify-between items-center max-w-md px-6 md:px-0 sm:max-w-lg md:max-w-xl lg:max-w-3xl xl:max-w-5xl 2xl:max-w-7xl mx-auto w-full py-6 font-bold">
+      <ul className="flex justify-between items-center max-w-md px-6 md:px-0 sm:max-w-lg md:max-w-xl lg:max-w-3xl xl:max-w-5xl 2xl:max-w-7xl mx-auto w-full py-6">
         <li>
           <Link
             className="text-2xl font-logo tracking-wider text-[#2e2e2e] hover:text-black duration-200"
@@ -40,11 +40,18 @@ const Navbar = () => {
               </li>
             </>
           ) : (
-            <li>
-              <Link className="bg-neu-black text-neu-white px-4 py-3 rounded-3xl" to="/register">
-                Sign Up
-              </Link>
-            </li>
+            <>
+              <li>
+                <Link className="text-neu-black duration-100" to="/login">
+                  Sign In
+                </Link>
+              </li>
+              <li>
+                <Link className="bg-neu-black text-neu-white hover:bg-black duration-150 px-4 py-3 rounded-3xl" to="/register">
+                  Sign Up
+                </Link>
+              </li>
+            </>
           )}
         </div>
       </ul>

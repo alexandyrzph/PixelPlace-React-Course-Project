@@ -1,10 +1,7 @@
 import { Routes, Route } from "react-router-dom";
-import PostEditForm from "./components/Forms/PostEditForm";
-import SignIn from "./components/Forms/SignIn";
-import SignUp from "./components/Forms/SignUp";
-import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home/Home";
 import Posts from "./pages/Posts/Posts";
+import { Navbar, PostCreate, PostDetails, PostEdit, SignIn, SignUp } from "./components/index";
 
 function App() {
   return (
@@ -16,10 +13,9 @@ function App() {
           <Route path="posts" element={<Posts />} />
           <Route path="register" element={<SignUp />} />
           <Route path="login" element={<SignIn />} />
-          <Route path="post-create" element={<SignIn />} />
-          <Route path="post/:postId" element={<SignIn />} />
-          <Route path="post-edit/:postId" element={<PostEditForm />} />
-
+          <Route path="post-create" element={<PostCreate />} />
+          <Route path="post/:postId" element={<PostDetails />} />
+          <Route path="post-edit/:postId" element={<PostEdit />} />
         </Routes>
       </div>
     </div>
