@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useState } from "react";
+import { MdOutlineExplore } from "react-icons/md";
 
 const Navbar = () => {
   const user = true;
@@ -17,21 +18,23 @@ const Navbar = () => {
             <p>PixelPlace</p>
           </Link>
         </li>
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-2">
           {user ? (
             <>
-              <Link className="mr-2" to="posts">
-                <li className="font-thin hover:font-bold duration-150">Discover</li>
+              <Link to="posts">
+                <li className="hover:-translate-y-[1px] bg-white text-xl hover:shadow-[2px_2px_0px_black] duration-100 cursor-pointer rounded-md border-black border-2">
+                  <MdOutlineExplore size={"1.5rem"} />
+                </li>
               </Link>
-              <Link to="post-create">
-                <li className="hover:-translate-y-[1px] text-xl hover:shadow-[2px_2px_0px_black] duration-100 cursor-pointer rounded-md bg-neu-white  border-black border-2">
-                  <AiOutlinePlus />
+              <Link className="mr-4" to="post-create">
+                <li className="hover:-translate-y-[1px] bg-white text-xl hover:shadow-[2px_2px_0px_black] duration-100 cursor-pointer rounded-md border-black border-2">
+                  <AiOutlinePlus size={"1.5rem"}/>
                 </li>
               </Link>
               <li>
                 <div className="relative flex-col -space-x-1 overflow-hidden">
                   <img
-                    className="cursor-pointer inline-block h-10 w-10 rounded-full ring-2 ring-white"
+                    className="border-2 border-neu-black cursor-pointer inline-block h-8 w-8 rounded-full ring-2 ring-white"
                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                     alt="avatar"
                     onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -47,7 +50,10 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <Link className="bg-neu-black text-neu-white hover:bg-black duration-150 px-4 py-3 rounded-3xl" to="/register">
+                <Link
+                  className="bg-neu-black text-neu-white hover:bg-black duration-150 px-4 py-3 rounded-3xl"
+                  to="/register"
+                >
                   Sign Up
                 </Link>
               </li>
