@@ -37,21 +37,33 @@ const PostCreateForm = () => {
           <div className="flex flex-wrap">
             <Field
               name="title"
-              className={`border-2 mt-3 w-full outline-none bg-white focus:shadow-[2px_2px_2px] duration-150 rounded-md ${touched.title && errors.title ? "border-red-500 focus:shadow-[2px_2px_2px] focus:shadow-red-500 " : "border-neu-black"} px-2 py-2`}
+              className={`border-2 mt-3 w-full outline-none bg-white focus:shadow-[2px_2px_2px] duration-150 rounded-md ${
+                touched.title && errors.title
+                  ? "border-red-500 focus:shadow-[2px_2px_2px] focus:shadow-red-500 "
+                  : "border-neu-black"
+              } px-2 py-2`}
               placeholder="Enter post title"
             />
             <ErrorMessage name="title" />
             <Field
               type="text"
               name="description"
-              className={`border-2 mt-3 w-full outline-none bg-white focus:shadow-[2px_2px_2px] duration-150 rounded-md ${touched.description && errors.description ? "border-red-500 focus:shadow-[2px_2px_2px] focus:shadow-red-500 " : "border-neu-black"} px-2 py-2`}
+              className={`border-2 mt-3 w-full outline-none bg-white focus:shadow-[2px_2px_2px] duration-150 rounded-md ${
+                touched.description && errors.description
+                  ? "border-red-500 focus:shadow-[2px_2px_2px] focus:shadow-red-500 "
+                  : "border-neu-black"
+              } px-2 py-2`}
               placeholder="Enter description"
             />
             <ErrorMessage name="description" />
             <Field
               type="text"
               name="category"
-              className={`border-2 mt-3 w-full outline-none bg-white focus:shadow-[2px_2px_2px] duration-150 rounded-md ${touched.category && errors.category ? "border-red-500 focus:shadow-[2px_2px_2px] focus:shadow-red-500 " : "border-neu-black"} px-2 py-2`}
+              className={`border-2 mt-3 w-full outline-none bg-white focus:shadow-[2px_2px_2px] duration-150 rounded-md ${
+                touched.category && errors.category
+                  ? "border-red-500 focus:shadow-[2px_2px_2px] focus:shadow-red-500 "
+                  : "border-neu-black"
+              } px-2 py-2`}
               placeholder="Enter category"
             />
             <ErrorMessage name="category" />

@@ -13,6 +13,7 @@ function App() {
           <Route path="posts" element={<Posts />} />
           <Route path="register" element={<SignUp />} />
           <Route path="login" element={<SignIn />} />
+          <Route path="profile" element={<SignIn />} />
           <Route path="post-create" element={<PostCreate />} />
           <Route path="post/:postId" element={<PostDetails />} />
           <Route path="post-edit/:postId" element={<PostEdit />} />

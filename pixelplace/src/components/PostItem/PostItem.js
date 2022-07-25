@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import ButtonYellow from "../buttons/ButtonYellow";
 import { AiFillLike } from "react-icons/ai";
 import { useState } from "react";
 
