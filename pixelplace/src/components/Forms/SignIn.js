@@ -13,8 +13,10 @@ const SignIn = () => {
       onSubmit={(values) => handleSubmit(values)}
     >
       {({ errors, touched }) => (
-        <Form className="w-full mx-auto  h-screen pt-[100px] max-w-xs sm:max-w-sm md:max-w-lg lg:max-w-3xl">
-          <h1 className="text-center text-5xl mb-10 font-logo">Sign In</h1>
+        <Form className="relative w-full mx-auto  h-screen pt-[80px] max-w-xs sm:max-w-sm md:max-w-lg lg:max-w-3xl">
+          <h1 className="relative text-[100px] text-5xl -z-10 -mb-[10px] font-logo">
+            Sign <span className="text-stroke text-white">In</span>
+          </h1>
 
           <div className="flex flex-wrap">
             <Field
@@ -22,7 +24,8 @@ const SignIn = () => {
               className={`border-2 mt-3 w-full outline-none bg-white focus:shadow-[2px_2px_2px] duration-150 rounded-md ${
                 touched.email && errors.email
                   ? "border-red-500 focus:shadow-[2px_2px_2px] focus:shadow-red-500 "
-                  : "border-neu-black"} px-2 py-2`}
+                  : "border-neu-black"
+              } px-2 py-2`}
               placeholder="Email"
             />
             <ErrorMessage name="email" />

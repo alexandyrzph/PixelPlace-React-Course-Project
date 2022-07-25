@@ -27,7 +27,7 @@ const PostItem = ({ image, title, description }) => {
           <Link to="#">
             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">{title}</h5>
           </Link>
-          <p className="mb-3 font-normal text-gray-700 ">{description}</p>
+          <p className="mb-3 font-normal text-gray-700 truncate">{description}</p>
           <AiFillLike
             size={"1.8rem"}
             onClick={onLikeHandler}
@@ -36,9 +36,11 @@ const PostItem = ({ image, title, description }) => {
           />
 
           <div className="inline-flex items-center">
-            <button className="relative flex-grow-1 w-full lg:w-full hover:shadow-neu-shadow hover:-translate-y-1 duration-200 border-2 outline-none border-neu-black px-6 py-3 rounded-lg bg-neu-yellow font-bold">
-              Read More
-            </button>
+            <Link to={`/post/wdad32q4ad`}>
+              <button className="relative flex-grow-1 w-full lg:w-full hover:shadow-neu-shadow hover:-translate-y-1 duration-200 border-2 outline-none border-neu-black px-6 py-3 rounded-lg bg-neu-yellow font-bold">
+                Read More
+              </button>
+            </Link>
           </div>
         </div>
       </div>

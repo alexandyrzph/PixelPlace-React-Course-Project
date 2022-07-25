@@ -10,7 +10,7 @@ const Posts = () => {
   const items = [
     {
       title: "Art gallery",
-      description: "Art pic from unsplash",
+      description: "Art pic from unsplashArt pic from unsplashArt pic from unsplashArt pic from unsplashArt pic from unsplashArt pic from unsplashArt pic from unsplashArt pic from unsplashArt pic from unsplashArt pic from unsplashArt pic from unsplashArt pic from unsplashArt pic from unsplashArt pic from unsplash",
       image: imageOne,
     },
     {
