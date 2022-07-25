@@ -6,3 +6,4 @@ export { default as PostCreate } from "./Forms/PostCreateForm";
 export { default as PostEdit } from "./Forms/PostEditForm";
 export { default as Navbar } from "./Navbar/Navbar";
 export { default as Profile } from "./Profile/Profile";
+export { default as ProtectedRoute } from './ProtectedRoute/ProtectedRoute';

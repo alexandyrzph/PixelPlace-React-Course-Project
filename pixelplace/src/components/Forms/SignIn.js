@@ -1,9 +1,21 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useUserAuth } from "../../context/UserAuthContext";
 import { SignInSchema } from "../../utils/formValidators";
 
 const SignIn = () => {
-  const handleSubmit = (values) => {
-    console.log(values);
+  const { signIn } = useUserAuth();
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = async ({ email, password }) => {
+    try {
+      await signIn(email, password);
+      navigate('/');
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   return (
@@ -17,7 +29,7 @@ const SignIn = () => {
           <h1 className="relative text-[100px] text-5xl -z-10 -mb-[10px] font-logo">
             Sign <span className="text-stroke text-white">In</span>
           </h1>
-
+          {error && <p className="text-red-500">{error}</p>}
           <div className="flex flex-wrap">
             <Field
               name="email"

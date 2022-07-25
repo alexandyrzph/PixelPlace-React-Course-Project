@@ -28,7 +28,7 @@ export const UserAuthContextProvider = ({ children }) => {
     };
   }, []);
 
-  return <userAuthContext.Provider value={{ user, signUp }}>{children}</userAuthContext.Provider>;
+  return <userAuthContext.Provider value={{ user, signUp, signIn }}>{children}</userAuthContext.Provider>;
 };
 
 export const useUserAuth = () => {
