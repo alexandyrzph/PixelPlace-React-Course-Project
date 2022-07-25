@@ -32,7 +32,7 @@ const PostCreateForm = () => {
     >
       {({ values, touched, errors, setFieldValue }) => (
         <Form className="w-full mx-auto  h-screen pt-[100px] max-w-xs sm:max-w-sm md:max-w-lg lg:max-w-3xl">
-          <h1 className="text-center text-5xl mb-10 font-logo">Create Post</h1>
+          <h1 className="relative text-[100px] text-5xl -z-10 -mb-[10px] font-logo">Create <span className="text-stroke text-white">Post</span></h1>
 
           <div className="flex flex-wrap">
             <Field
