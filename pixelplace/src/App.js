@@ -1,7 +1,15 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Posts from "./pages/Posts/Posts";
-import { Navbar, PostCreate, PostDetails, PostEdit, SignIn, SignUp } from "./components/index";
+import {
+  Navbar,
+  Profile,
+  PostCreate,
+  PostDetails,
+  PostEdit,
+  SignIn,
+  SignUp,
+} from "./components/index";
 
 function App() {
   return (
