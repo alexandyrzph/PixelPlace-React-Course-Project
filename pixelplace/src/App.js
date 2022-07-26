@@ -13,9 +13,10 @@ import {
     ProtectedRoute,
 } from "./components/index";
 import { useUserAuth } from "./context/UserAuthContext";
+import { BeatLoader } from "react-spinners";
 
 function App() {
-    const { user, isLoading } = useUserAuth();
+    const { isLoading } = useUserAuth();
     console.log(isLoading);
     if (!isLoading) {
         return (
@@ -52,6 +53,12 @@ function App() {
                         }
                     />
                 </Routes>
+            </div>
+        );
+    } else {
+        return (
+            <div className="flex justify-center items-center h-screen bg-neu-white">
+                <BeatLoader size={"5rem"} color={"#1e1e1e"} />
             </div>
         );
     }

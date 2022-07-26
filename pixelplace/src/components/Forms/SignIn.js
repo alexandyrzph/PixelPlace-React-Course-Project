@@ -1,13 +1,13 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useUserAuth } from "../../context/UserAuthContext";
+import { useNavigate, Navigate } from "react-router-dom";
+import {  useUserAuth } from "../../context/UserAuthContext";
 import { SignInSchema } from "../../utils/formValidators";
 
 const SignIn = () => {
-    const { signIn } = useUserAuth();
-    const [error, setError] = useState("");
     const navigate = useNavigate();
+    const { user, signIn } = useUserAuth();
+    const [error, setError] = useState("");
 
     const handleSubmit = async ({ email, password }) => {
         try {
@@ -17,7 +17,9 @@ const SignIn = () => {
             setError(err.message);
         }
     };
-
+    if (user) {
+        return <Navigate to="/" />;
+    }
     return (
         <Formik
             initialValues={{ email: "", password: "" }}

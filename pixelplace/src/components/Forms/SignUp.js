@@ -2,10 +2,10 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { SignUpSchema } from "../../utils/formValidators";
 import { useUserAuth } from "../../context/UserAuthContext";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
-    const { signUp } = useUserAuth();
+    const { user, signUp } = useUserAuth();
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
@@ -17,6 +17,10 @@ const SignUp = () => {
             setError(err.message);
         }
     };
+
+    if (user) {
+        return <Navigate to="/" />;
+    }
 
     return (
         <Formik
