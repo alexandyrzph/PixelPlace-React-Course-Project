@@ -12,12 +12,14 @@ import {
     SignUp,
     ProtectedRoute,
 } from "./components/index";
-import { UserAuthContextProvider } from "./context/UserAuthContext";
+import { useUserAuth } from "./context/UserAuthContext";
 
 function App() {
-    return (
-        <div className="App">
-            <UserAuthContextProvider>
+    const { user, isLoading } = useUserAuth();
+    console.log(isLoading);
+    if (!isLoading) {
+        return (
+            <div className="App">
                 <Navbar />
                 <Routes>
                     <Route path="/" element={<Home />} />
@@ -50,9 +52,9 @@ function App() {
                         }
                     />
                 </Routes>
-            </UserAuthContextProvider>
-        </div>
-    );
+            </div>
+        );
+    }
 }
 
 export default App;

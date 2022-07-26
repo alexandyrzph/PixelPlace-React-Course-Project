@@ -8,13 +8,10 @@ import { useUserAuth } from "../../context/UserAuthContext";
 
 const Navbar = () => {
     const { user, isLoading } = useUserAuth();
-
     const [show, setShow] = useState(false);
     const container = useRef(null);
     const navigate = useNavigate();
-
     const { logout } = useUserAuth();
-
     const logoutHandler = async () => {
         try {
             await logout();
@@ -36,7 +33,7 @@ const Navbar = () => {
             window.addEventListener("click", handleOutsideClick);
             return () => window.removeEventListener("click", handleOutsideClick);
         }
-    }, [show, container]);
+    }, [user, show, container]);
     if (!isLoading) {
         return (
             <div className="bg-neu-white">
@@ -83,7 +80,13 @@ const Navbar = () => {
                                             leaveFrom="opacity-100 scale-100"
                                             leaveTo="opacity-0 scale-95"
                                         >
-                                            <div className="absolute z-[500] right-0 w-48 mt-1 bg-white rounded hover:shadow-[2px_2px_2px] border-2 border-neu-black duration-150">
+                                            <div className="absolute z-[500] right-0 max-w-fit mt-1 bg-white rounded hover:shadow-[2px_2px_2px] border-2 border-neu-black duration-150">
+                                                <div>
+                                                    <p className="block px-4 py-2 hover:bg-neu-yellow hover:text-neu-black duration-150 truncate">
+                                                        Hello, {user.email}!
+                                                    </p>
+                                                    <hr />
+                                                </div>
                                                 <Link to="/profile">
                                                     <p className="block px-4 py-2 hover:bg-neu-yellow hover:text-neu-black duration-150">
                                                         Profile
