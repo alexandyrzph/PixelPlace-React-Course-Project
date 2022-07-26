@@ -11,7 +11,7 @@ const Home = () => {
                         <p className="text-5xl md:text-6xl mb-6 font-neu font-light">
                             Wonder where <br /> to share
                             <span className="font-extrabold">
-                                your
+                                {" "}your{" "}
                                 <span className="bg-neu-yellow text-neu-white text-stroke">
                                     art?
                                 </span>
