@@ -1,25 +1,40 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
 
 import { MdOutlineExplore } from "react-icons/md";
 import { useEffect, useRef, useState } from "react";
 import { Transition } from "@tailwindui/react";
+import { useUserAuth } from "../../context/UserAuthContext";
 
 const Navbar = () => {
     const user = true;
     const [show, setShow] = useState(false);
     const container = useRef(null);
+    const navigate = useNavigate();
+
+    const { logout } = useUserAuth();
+
+    const logoutHandler = async () => {
+        try {
+            await logout();
+            navigate("/login");
+        } catch (err) {
+            console.log(err.message);
+        }
+    };
 
     useEffect(() => {
-        const handleOutsideClick = (event) => {
-            if (!container.current.contains(event.target)) {
-                if (!show) return;
-                setShow(false);
-            }
-        };
+        if (user) {
+            const handleOutsideClick = (event) => {
+                if (!container.current.contains(event.target)) {
+                    if (!show) return;
+                    setShow(false);
+                }
+            };
 
-        window.addEventListener("click", handleOutsideClick);
-        return () => window.removeEventListener("click", handleOutsideClick);
+            window.addEventListener("click", handleOutsideClick);
+            return () => window.removeEventListener("click", handleOutsideClick);
+        }
     }, [show, container]);
 
     return (
@@ -58,7 +73,6 @@ const Navbar = () => {
                                             alt="image"
                                         />
                                     </button>
-
                                     <Transition
                                         show={show}
                                         enter="transition ease-out duration-100 transform"
@@ -75,11 +89,14 @@ const Navbar = () => {
                                                 </p>
                                             </Link>
                                             <hr />
-                                            <Link to="/api/logout">
+                                            <button
+                                                onClick={logoutHandler}
+                                                className="text-left w-full"
+                                            >
                                                 <p className="block px-4 py-2 hover:bg-neu-yellow hover:text-neu-black duration-75">
                                                     Logout
                                                 </p>
-                                            </Link>
+                                            </button>
                                         </div>
                                     </Transition>
                                 </div>

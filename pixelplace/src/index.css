@@ -3,24 +3,24 @@
 @tailwind utilities;
 
 @layer utilities {
-  @variants responsive {
-    .masonry {
-      column-gap: 1.5em;
-      column-count: 1;
+    @variants responsive {
+        .masonry {
+            column-gap: 1.5em;
+            column-count: 1;
+        }
+        .masonry-md {
+            column-gap: 1.5em;
+            column-count: 2;
+        }
+        .masonry-lg {
+            column-gap: 2em;
+            column-count: 3;
+        }
+
+        .break-inside {
+            break-inside: avoid;
+        }
     }
-    .masonry-md {
-      column-gap: 1.5em;
-      column-count: 2;
-    }
-    .masonry-lg { 
-      column-gap: 2em;
-      column-count: 3;
-    }
-    
-    .break-inside {
-      break-inside: avoid;
-    }
-  }
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500;700;900&display=swap");
@@ -29,30 +29,30 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
+    width: 5px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  border-radius: 10px;
+    border-radius: 10px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: black;
-  border-radius: 10px;
+    background: black;
+    border-radius: 10px;
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  background-color: rgb(255, 255, 244);
+    margin: 0;
+    padding: 0;
+    background-color: rgb(255, 255, 244);
 }
 
 .text-stroke {
-  -webkit-text-stroke: 2px rgb(39, 36, 30);
+    -webkit-text-stroke: 2px rgb(39, 36, 30);
 }
