@@ -1,11 +1,8 @@
 import { Link } from "react-router-dom";
 import homeImg from "../../assets/sport_2.svg";
 import accent from "../../assets/26432.svg";
-import { useUserAuth } from "../../context/UserAuthContext";
 
 const Home = () => {
-    let { user } = useUserAuth();
-
     return (
         <div>
             <div className="flex relative z-20 justify-center lg:justify-between w-full max-w-xs sm:max-w-sm md:max-w-lg lg:max-w-3xl xl:max-w-3xl overflow-ellipsis 2xl:max-w-7xl mx-auto h-screen pt-[30%] md:pt-[10%]">
