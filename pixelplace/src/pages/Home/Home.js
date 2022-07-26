@@ -35,7 +35,6 @@ const Home = () => {
                         </Link>
                     </div>
                 </div>
-                <p>{user && user?.email}</p>
                 <img
                     className="hidden 2xl:block absolute right-20 -z-20 w-[600px] xl:w-[600px]"
                     src={homeImg}
