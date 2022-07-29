@@ -1,13 +1,21 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useEffect, useRef, useState } from "react";
 import { AiOutlineCloudUpload } from "react-icons/ai";
+import { db, storage } from "../../firebase";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { CreatePostSchema } from "../../utils/formValidators";
+import { useUserAuth } from "../../context/UserAuthContext";
+import { useNavigate } from "react-router-dom";
+import { uuidv4 } from "@firebase/util";
 
 const PostCreateForm = () => {
     const [image, setImage] = useState();
+    const navigate = useNavigate();
+    const { user } = useUserAuth();
     const [preview, setPreview] = useState();
     const fileRef = useRef(null);
-
+    console.log(user);
     useEffect(() => {
         if (image) {
             const reader = new FileReader();
@@ -15,18 +23,49 @@ const PostCreateForm = () => {
                 setPreview(reader.result);
             };
             reader.readAsDataURL(image);
-        } else {
-            setPreview(null);
         }
+        setPreview((prev) => null);
     }, [image]);
 
-    const handleSubmit = (values) => {
-        console.log(values);
+    const uploadImage = async (image) => {
+        const imageRef = ref(storage, `${new Date().getTime() + image.name}`);
+        try {
+            const res = await uploadBytes(imageRef, image, {
+                contentType: "image/jpg" | "image/jpeg" | "image/svg" | "image/png",
+            });
+            return getDownloadURL(res.ref);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    const handleSubmit = async (values) => {
+        const url = await uploadImage(values.image);
+        try {
+            await addDoc(collection(db, "Posts"), {
+                ...values,
+                image: url,
+                ownerId: user.uid,
+                timeStamp: serverTimestamp(),
+                ownerAvatarURL:
+                    user.photoURL ??
+                    "https://firebasestorage.googleapis.com/v0/b/pixelplace-b8fac.appspot.com/o/1024px-Faenza-avatar-default-symbolic.svg.png?alt=media&token=986532b2-c109-4faf-b607-30ce2a1e1ff8",
+                uid:  uuidv4()
+                });
+            navigate("/posts");
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     return (
         <Formik
-            initialValues={{ title: "", description: "", category: "", image: null }}
+            initialValues={{
+                title: "",
+                description: "",
+                category: "",
+                image: null,
+            }}
             validationSchema={CreatePostSchema}
             onSubmit={(values) => handleSubmit(values)}
         >

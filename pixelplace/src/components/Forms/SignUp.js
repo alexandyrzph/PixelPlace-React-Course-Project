@@ -3,15 +3,21 @@ import { SignUpSchema } from "../../utils/formValidators";
 import { useUserAuth } from "../../context/UserAuthContext";
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../firebase";
 
 const SignUp = () => {
     const { user, signUp } = useUserAuth();
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
-    const handleSubmit = async ({ email, password }) => {
+    const handleSubmit = async ({username, email, password}) => {
         try {
-            await signUp(email, password);
+            const res = await signUp(email, password);
+            await setDoc(doc(db, 'Users', res.user.uid), {
+                username,
+                email,
+            })
             navigate("/");
         } catch (err) {
             setError(err.message);

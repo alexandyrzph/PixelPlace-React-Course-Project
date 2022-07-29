@@ -64,8 +64,11 @@ const Navbar = () => {
                                         onClick={() => setShow(!show)}
                                     >
                                         <img
-                                            className="w-10 h-10 rounded-full"
-                                            src="https://play-lh.googleusercontent.com/8ID9RW2dLGPxai5r5W_c-JESdD2a_lyAfX0hncKq0bqLuFcC-qfstgTPfmtynR9jYg"
+                                            className="w-10 h-10 rounded-full border-2 border-neu-black"
+                                            src={
+                                                user.photoURL ??
+                                                "https://firebasestorage.googleapis.com/v0/b/pixelplace-b8fac.appspot.com/o/1024px-Faenza-avatar-default-symbolic.svg.png?alt=media&token=986532b2-c109-4faf-b607-30ce2a1e1ff8"
+                                            }
                                             alt="user"
                                         />
                                     </button>
