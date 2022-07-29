@@ -1,21 +1,29 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { CreatePostSchema } from "../../utils/formValidators";
 import { useEffect, useRef, useState } from "react";
 import { AiOutlineCloudUpload } from "react-icons/ai";
-import { db, storage } from "../../firebase";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { CreatePostSchema } from "../../utils/formValidators";
-import { useUserAuth } from "../../context/UserAuthContext";
 import { useNavigate } from "react-router-dom";
+import { db, storage } from "../../firebase";
+import { addDoc, collection, doc, getDoc, serverTimestamp } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { useUserAuth } from "../../context/UserAuthContext";
 import { uuidv4 } from "@firebase/util";
 
 const PostCreateForm = () => {
     const [image, setImage] = useState();
+    const [userInDb, setUserInDb] = useState();
+    const [preview, setPreview] = useState();
     const navigate = useNavigate();
     const { user } = useUserAuth();
-    const [preview, setPreview] = useState();
     const fileRef = useRef(null);
-    console.log(user);
+
+    useEffect(() => {
+        const docRef = doc(db, "Users", user.uid);
+        getDoc(docRef)
+            .then((data) => setUserInDb(data.data()))
+            .catch((err) => console.log(err));
+    }, [user]);
+
     useEffect(() => {
         if (image) {
             const reader = new FileReader();
@@ -46,12 +54,13 @@ const PostCreateForm = () => {
                 ...values,
                 image: url,
                 ownerId: user.uid,
+                ownerUsername: userInDb.username,
                 timeStamp: serverTimestamp(),
                 ownerAvatarURL:
-                    user.photoURL ??
+                    userInDb.photoURL ??
                     "https://firebasestorage.googleapis.com/v0/b/pixelplace-b8fac.appspot.com/o/1024px-Faenza-avatar-default-symbolic.svg.png?alt=media&token=986532b2-c109-4faf-b607-30ce2a1e1ff8",
-                uid:  uuidv4()
-                });
+                postId: uuidv4(),
+            });
             navigate("/posts");
         } catch (err) {
             console.log(err);
