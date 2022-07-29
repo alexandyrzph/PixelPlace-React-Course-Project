@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import imageOne from "../../assets/postImages/1.jpg";
 import Dots from "../../assets/26432.svg";
-import { collection, doc, getDoc, query, where } from "firebase/firestore";
-import { db } from "../../firebase";
+import { doc, getDoc } from "firebase/firestore";
 import { BeatLoader } from "react-spinners";
+import { db } from "../../firebase";
+
 const PostDetails = () => {
     const [post, setPost] = useState();
     const [isLoading, setIsLoading] = useState(false);
