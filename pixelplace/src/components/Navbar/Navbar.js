@@ -44,17 +44,17 @@ const Navbar = () => {
                         <p>PixelPlace</p>
                     </Link>
                 </li>
-                <div className="flex items-center gap-2">
+                <div className="flex justify-center items-center gap-2">
                     {user ? (
                         <>
                             <Link to="posts">
                                 <li className="hover:-translate-y-[1px] bg-white text-xl hover:shadow-[2px_2px_0px_black] duration-100 cursor-pointer rounded-md border-black border-2">
-                                    <MdOutlineExplore size={"1.5rem"} />
+                                    <MdOutlineExplore size={"1.8rem"} />
                                 </li>
                             </Link>
-                            <Link className="mr-4" to="post-create">
-                                <li className="hover:-translate-y-[1px] bg-white text-xl hover:shadow-[2px_2px_0px_black] duration-100 cursor-pointer rounded-md border-black border-2">
-                                    <AiOutlinePlus size={"1.5rem"} />
+                            <Link className="" to="post-create">
+                                <li className="hover:-translate-y-[1px]  bg-white text-xl hover:shadow-[2px_2px_0px_black] duration-100 cursor-pointer rounded-md border-black border-2">
+                                    <AiOutlinePlus size={"1.8rem"} />
                                 </li>
                             </Link>
                             <li>
@@ -64,7 +64,7 @@ const Navbar = () => {
                                         onClick={() => setShow(!show)}
                                     >
                                         <img
-                                            className="w-10 h-10 rounded-full border-2 border-neu-black"
+                                            className="w-[35px] h-[35px] translate-y-[2px] bg-white items-center rounded-md border-2 border-neu-black"
                                             src={
                                                 user.photoURL ??
                                                 "https://firebasestorage.googleapis.com/v0/b/pixelplace-b8fac.appspot.com/o/1024px-Faenza-avatar-default-symbolic.svg.png?alt=media&token=986532b2-c109-4faf-b607-30ce2a1e1ff8"
