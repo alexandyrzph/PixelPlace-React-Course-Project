@@ -12,12 +12,14 @@ const Posts = () => {
         getDocs(collection(db, "Posts"))
             .then((snapshot) => {
                 let posts = [];
-                snapshot.forEach((doc) => posts.push(doc.data()));
+                snapshot.forEach((doc) => {
+                    posts.push({ ...doc.data(), postId: doc.id });
+                });
                 setPosts((prev) => posts);
             })
             .catch((err) => console.log(err.message));
     }, []);
-    
+
     return (
         <div className="relative max-w-md px-1 md:px-0 sm:max-w-lg md:max-w-xl lg:max-w-3xl xl:max-w-5xl 2xl:max-w-7xl mx-auto w-full h-screen py-16">
             <div className="masonry sm:masonry-sm md:masonry-md lg:masonry-lg">

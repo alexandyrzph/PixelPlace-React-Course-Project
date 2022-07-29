@@ -28,7 +28,7 @@ export const UserAuthContextProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
-            setIsLoading(false)
+            setIsLoading(false);
         });
         return () => {
             unsubscribe();
@@ -36,7 +36,7 @@ export const UserAuthContextProvider = ({ children }) => {
     }, []);
 
     return (
-        <userAuthContext.Provider value={{ user, isLoading,signUp, signIn, logout }}>
+        <userAuthContext.Provider value={{ user, isLoading, signUp, signIn, logout }}>
             {children}
         </userAuthContext.Provider>
     );
