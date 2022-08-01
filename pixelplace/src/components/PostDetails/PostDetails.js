@@ -68,10 +68,10 @@ const PostDetails = () => {
                         <h2 className="mt-5 text-lg">Comments:</h2>
                         <div className="max-h-370 overflow-y-auto">
                             <div className="flex gap-2 mt-5 items-center bg-white rounded-lg">
-                                {post?.comments.length === 0 ? (
+                                {post?.comments?.length === 0 ? (
                                     <p>No comments yet</p>
                                 ) : (
-                                    post?.comments.map((comment) => (
+                                    post?.comments?.map((comment) => (
                                         <>
                                             <img
                                                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"

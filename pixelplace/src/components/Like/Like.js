@@ -13,13 +13,13 @@ const Like = ({ likes, postId }) => {
             updateDoc(likesRef, {
                 likes: arrayRemove(user.uid),
             })
-                .then(() => console.log("Unliked"))
+                .then()
                 .catch((err) => console.log(err));
         } else {
             updateDoc(likesRef, {
                 likes: arrayUnion(user.uid),
             })
-                .then(() => console.log("Liked"))
+                .then()
                 .catch((err) => console.log(err));
         }
     };
