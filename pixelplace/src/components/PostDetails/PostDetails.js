@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
 import { getPostById } from "../../api/PostsAPI";
 import Dots from "../../assets/26432.svg";
+import { HiDotsHorizontal } from "react-icons/hi";
+import { useUserAuth } from "../../context/UserAuthContext";
 
 const PostDetails = () => {
+    const { user } = useUserAuth();
     const [post, setPost] = useState();
     const [isLoading, setIsLoading] = useState(false);
-    const [currentUser, setCurrentUser] = useState("");
     const { postId } = useParams();
 
     useEffect(() => {
@@ -46,7 +48,13 @@ const PostDetails = () => {
                         />
                     </div>
                     <div className="relative border-2 border-t-none rounded-b-lg border-neu-black bg-white p-4">
-                        <div className="flex justify-between mt-2">
+                        <div className="flex justify-between">
+                            <h1 className="text-xl font-neu">{post?.title}</h1>
+                            <HiDotsHorizontal className="" />
+                        </div>
+                        <div className="text-lg mb-2">{post?.description}</div>
+
+                        <div className="flex justify-between mt-4">
                             <div className="flex justify-center items-center gap-6">
                                 <img
                                     className="border-2 border-neu-black cursor-pointer inline-block h-9 w-9 rounded-full ring-2 ring-white"
@@ -63,8 +71,6 @@ const PostDetails = () => {
                             Likes: <span className="font-bold">{post?.likes.length}</span>
                         </p>
 
-                        <h1 className="text-xl font-neu">{post?.title}</h1>
-                        <div className="text-lg mb-2">{post?.description}</div>
                         <h2 className="mt-5 text-lg">Comments:</h2>
                         <div className="max-h-370 overflow-y-auto">
                             <div className="flex gap-2 mt-5 items-center bg-white rounded-lg">
@@ -87,10 +93,10 @@ const PostDetails = () => {
                                 )}
                             </div>
                         </div>
-                        <div className="flex flex-wrap mt-6 gap-3">
+                        <div className="flex flex-wrap mt-6 items-center gap-3">
                             <img
-                                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                className="w-10 h-10 rounded-full"
+                                src={user.photoURL}
+                                className="w-9 h-9 items-center object-cover object-center rounded-full"
                                 alt="user-profile"
                             />
                             <input

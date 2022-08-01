@@ -7,21 +7,14 @@ import { db, storage } from "../../firebase";
 import { addDoc, collection, doc, getDoc, serverTimestamp } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useUserAuth } from "../../context/UserAuthContext";
+import { BsShieldFillExclamation } from "react-icons/bs";
 
 const PostCreateForm = () => {
     const [image, setImage] = useState();
-    const [userInDb, setUserInDb] = useState();
     const [preview, setPreview] = useState();
     const navigate = useNavigate();
     const { user } = useUserAuth();
     const fileRef = useRef(null);
-
-    useEffect(() => {
-        const docRef = doc(db, "Users", user.uid);
-        getDoc(docRef)
-            .then((data) => setUserInDb(data.data()))
-            .catch((err) => console.log(err));
-    }, [user]);
 
     useEffect(() => {
         if (image) {
@@ -53,10 +46,10 @@ const PostCreateForm = () => {
                 ...values,
                 image: url,
                 ownerId: user.uid,
-                ownerUsername: userInDb.username,
+                ownerUsername: user.displayName,
                 timeStamp: serverTimestamp(),
                 ownerAvatarURL:
-                    userInDb.photoURL ??
+                    user.photoURL ??
                     "https://firebasestorage.googleapis.com/v0/b/pixelplace-b8fac.appspot.com/o/1024px-Faenza-avatar-default-symbolic.svg.png?alt=media&token=986532b2-c109-4faf-b607-30ce2a1e1ff8",
                 likes: [],
                 comments: [],
@@ -93,7 +86,13 @@ const PostCreateForm = () => {
                             } px-2 py-2`}
                             placeholder="Enter post title"
                         />
-                        <ErrorMessage name="title" />
+                        {touched.title && errors.title ? (
+                            <p className="flex items-center gap-2 mt-1 text-red-600">
+                                <BsShieldFillExclamation />
+                                {errors.title}
+                            </p>
+                        ) : null}
+
                         <Field
                             type="text"
                             name="description"
@@ -104,7 +103,12 @@ const PostCreateForm = () => {
                             } px-2 py-2`}
                             placeholder="Enter description"
                         />
-                        <ErrorMessage name="description" />
+                        {touched.description && errors.description ? (
+                            <p className="flex items-center gap-2 mt-1 text-red-600">
+                                <BsShieldFillExclamation />
+                                {errors.description}
+                            </p>
+                        ) : null}
                         <Field
                             type="text"
                             name="category"
@@ -115,7 +119,12 @@ const PostCreateForm = () => {
                             } px-2 py-2`}
                             placeholder="Enter category"
                         />
-                        <ErrorMessage name="category" />
+                        {touched.category && errors.category ? (
+                            <p className="flex items-center gap-2 mt-1 text-red-600">
+                                <BsShieldFillExclamation />
+                                {errors.category}
+                            </p>
+                        ) : null}
 
                         <div className="mt-3 flex justify-center md:flex-row flex-col items-center w-full">
                             <label
@@ -168,7 +177,12 @@ const PostCreateForm = () => {
                             }}
                         />
 
-                        <ErrorMessage name="image" />
+                        {touched.image && errors.image ? (
+                            <p className="flex items-center gap-2 mt-1 text-red-600">
+                                <BsShieldFillExclamation />
+                                {errors.image}
+                            </p>
+                        ) : null}
                         <div className="mt-4 w-full">
                             <button
                                 type="Submit"

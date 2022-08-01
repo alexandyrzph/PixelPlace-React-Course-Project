@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Like from "../Like/Like";
+import { HiDotsHorizontal } from "react-icons/hi";
 
 const PostItem = ({
     ownerUsername,
@@ -10,13 +11,21 @@ const PostItem = ({
     ownerAvatarURL,
     postId,
     likes,
+    ownerId,
 }) => {
     return (
         <div className="break-inside mb-4 shadow-md rounded-lg shadow-gray-300">
             <div className=" bg-white rounded-lg border-2 border-neu-black">
-                <div className="p-2 flex items-center">
-                    <img className="w-10 rounded-full mr-4" src={ownerAvatarURL} alt="" />
-                    <p>{ownerUsername}</p>
+                <div className="p-2 flex justify-between items-center">
+                    <div className="flex items-center">
+                        <img
+                            className="w-10 h-10 object-cover object-center rounded-full mr-4"
+                            src={ownerAvatarURL}
+                            alt=""
+                        />
+                        <p>{ownerUsername}</p>
+                    </div>
+                    {user && user.uid === ownerId ? <HiDotsHorizontal cursor={"pointer"} /> : null}
                 </div>
                 <Link to={postId}>
                     <img src={image} alt="" />
