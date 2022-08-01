@@ -1,3 +1,5 @@
+export { default as Home } from "./Home/Home";
+export { default as Posts } from "./Posts/Posts";
 export { default as SignUp } from "./Forms/SignUp";
 export { default as SignIn } from "./Forms/SignIn";
 export { default as PostItem } from "./PostItem/PostItem";

@@ -1,8 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-import Home from "./components/Home/Home";
-import Posts from "./components/Posts/Posts";
-import "react-toastify/dist/ReactToastify.css";
-
 import {
     Navbar,
     Profile,
@@ -12,9 +8,12 @@ import {
     SignIn,
     SignUp,
     ProtectedRoute,
+    Home,
+    Posts,
 } from "./components/index";
 import { useUserAuth } from "./context/UserAuthContext";
 import { BeatLoader } from "react-spinners";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
     const { isLoading } = useUserAuth();
