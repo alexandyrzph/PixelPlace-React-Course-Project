@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       boxShadow: {
-        "neu-shadow": "5px 5px 0px black",
+        "neu-shadow": "2px 2px 0px black",
       },
       colors: {
         "neu-white": "rgb(255,255,244)",
