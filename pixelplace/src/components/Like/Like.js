@@ -29,7 +29,7 @@ const Like = ({ likes, postId }) => {
             size={"1.7rem"}
             onClick={onLikeHandler}
             color={likes?.includes(user.uid) ? "red" : ""}
-            className="mb-2 mt-4 cursor-pointer duration-100"
+            className="mb-2 cursor-pointer duration-100"
         />
     );
 };

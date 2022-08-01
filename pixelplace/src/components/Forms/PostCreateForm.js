@@ -71,7 +71,7 @@ const PostCreateForm = () => {
             validationSchema={CreatePostSchema}
             onSubmit={(values) => handleSubmit(values)}
         >
-            {({ values, touched, errors, setFieldValue }) => (
+            {({ touched, errors, setFieldValue }) => (
                 <Form className="w-full mx-auto  h-screen pt-[100px] max-w-xs sm:max-w-sm md:max-w-lg lg:max-w-3xl">
                     <h1 className="relative text-[100px] text-5xl -z-10 -mb-[10px] font-logo">
                         Create <span className="text-stroke text-white">Post</span>
@@ -79,9 +79,9 @@ const PostCreateForm = () => {
                     <div className="flex flex-wrap">
                         <Field
                             name="title"
-                            className={`border-2 mt-3 w-full outline-none bg-white focus:shadow-[2px_2px_2px] duration-150 rounded-md ${
+                            className={`border-2 mt-3 w-full outline-none bg-white focus:shadow-[2px_2px_0px] duration-150 rounded-md ${
                                 touched.title && errors.title
-                                    ? "border-red-500 focus:shadow-[2px_2px_2px] focus:shadow-red-500 "
+                                    ? "border-red-500 focus:shadow-[2px_2px_0px] focus:shadow-red-500 "
                                     : "border-neu-black"
                             } px-2 py-2`}
                             placeholder="Enter post title"
@@ -96,9 +96,9 @@ const PostCreateForm = () => {
                         <Field
                             type="text"
                             name="description"
-                            className={`border-2 mt-3 w-full outline-none bg-white focus:shadow-[2px_2px_2px] duration-150 rounded-md ${
+                            className={`border-2 mt-3 w-full outline-none bg-white focus:shadow-[2px_2px_0px] duration-150 rounded-md ${
                                 touched.description && errors.description
-                                    ? "border-red-500 focus:shadow-[2px_2px_2px] focus:shadow-red-500 "
+                                    ? "border-red-500 focus:shadow-[2px_2px_0px] focus:shadow-red-500 "
                                     : "border-neu-black"
                             } px-2 py-2`}
                             placeholder="Enter description"
@@ -112,9 +112,9 @@ const PostCreateForm = () => {
                         <Field
                             type="text"
                             name="category"
-                            className={`border-2 mt-3 w-full outline-none bg-white focus:shadow-[2px_2px_2px] duration-150 rounded-md ${
+                            className={`border-2 mt-3 w-full outline-none bg-white focus:shadow-[2px_2px_0px] duration-150 rounded-md ${
                                 touched.category && errors.category
-                                    ? "border-red-500 focus:shadow-[2px_2px_2px] focus:shadow-red-500 "
+                                    ? "border-red-500 focus:shadow-[2px_2px_0px] focus:shadow-red-500 "
                                     : "border-neu-black"
                             } px-2 py-2`}
                             placeholder="Enter category"
@@ -133,7 +133,11 @@ const PostCreateForm = () => {
                                     e.preventDefault();
                                     fileRef.current.click();
                                 }}
-                                className="relative z-[9] flex flex-col justify-center items-center w-full h-64 bg-white rounded-lg border-2 border-neu-black border-dashed cursor-pointer"
+                                className={`relative z-[9] flex flex-col justify-center items-center w-full h-64 bg-white rounded-lg border-2 ${
+                                    touched.image && errors.image
+                                        ? `border-red-600`
+                                        : "border-neu-black"
+                                } border-dashed cursor-pointer`}
                             >
                                 <div className="relative flex flex-col justify-center items-center pt-5 pb-6">
                                     <AiOutlineCloudUpload size={"2rem"} />
@@ -150,7 +154,7 @@ const PostCreateForm = () => {
                                         id="image"
                                         src={preview}
                                         alt="preview"
-                                        className="h-[200px] w-[200px] p-2 z-10 hover:brightness-50 cursor-pointer duration-100"
+                                        className="h-[250px] max-w-sm object-cover object-center p-2 z-10 hover:brightness-50 cursor-pointer duration-100"
                                         onClick={(e) => {
                                             setImage(null);
                                             setFieldValue("image", null);

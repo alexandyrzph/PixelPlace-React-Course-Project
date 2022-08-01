@@ -37,7 +37,12 @@ const PostItem = ({
                         </h5>
                     </Link>
                     <p className="mb-3 font-normal text-gray-700 truncate">{description}</p>
-                    {user && <Like postId={postId} likes={likes} />}
+                    {user && (
+                        <div className="flex items-center gap-1 mb-4 mt-6">
+                            <p>{likes.length}</p>
+                            <Like postId={postId} likes={likes} />
+                        </div>
+                    )}
 
                     <div className="inline-flex items-center">
                         <Link to={postId}>
