@@ -33,12 +33,12 @@ const Posts = () => {
                 </div>
                 <img
                     className="hidden lg:block absolute top-5 -left-20 opacity-10 -z-10 w-[200px]"
-                    src={Dots}
+                    src="https://firebasestorage.googleapis.com/v0/b/pixelplace-b8fac.appspot.com/o/26432.svg?alt=media&token=17971521-81ad-4e86-bd5b-f0051d4c5a13"
                     alt="Dots"
                 />
                 <img
                     className="hidden lg:block absolute top-100 -right-20 opacity-10 -z-10 w-[200px]"
-                    src={Dots}
+                    src="https://firebasestorage.googleapis.com/v0/b/pixelplace-b8fac.appspot.com/o/26432.svg?alt=media&token=17971521-81ad-4e86-bd5b-f0051d4c5a13"
                     alt="Dots"
                 />
             </div>

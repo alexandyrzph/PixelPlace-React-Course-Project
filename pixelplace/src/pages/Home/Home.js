@@ -1,6 +1,4 @@
 import { Link } from "react-router-dom";
-import homeImg from "../../assets/sport_2.svg";
-import accent from "../../assets/26432.svg";
 import { useUserAuth } from "../../context/UserAuthContext";
 
 const Home = () => {
@@ -47,17 +45,17 @@ const Home = () => {
                 </div>
                 <img
                     className="hidden 2xl:block absolute right-20 -z-20 w-[600px] xl:w-[600px]"
-                    src={homeImg}
+                    src="https://firebasestorage.googleapis.com/v0/b/pixelplace-b8fac.appspot.com/o/sport_2.svg?alt=media&token=cb1b33f1-cf1e-40f3-8da1-fc5f7ffeb3af"
                     alt="homeimg"
                 />
                 <img
                     className="hidden lg:block absolute mt-80 -left-60  -z-20 w-[250px]"
-                    src={accent}
+                    src="https://firebasestorage.googleapis.com/v0/b/pixelplace-b8fac.appspot.com/o/26432.svg?alt=media&token=17971521-81ad-4e86-bd5b-f0051d4c5a13"
                     alt="homeimg"
                 />
                 <img
                     className="hidden lg:block absolute mb-80 right-20  -z-20 w-[100px]"
-                    src={accent}
+                    src="https://firebasestorage.googleapis.com/v0/b/pixelplace-b8fac.appspot.com/o/26432.svg?alt=media&token=17971521-81ad-4e86-bd5b-f0051d4c5a13"
                     alt="homeimg"
                 />
             </div>
