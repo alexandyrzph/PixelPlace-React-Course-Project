@@ -10,7 +10,8 @@ import { db, storage } from "../../firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
 import { toastError } from "../../utils/Toast";
-
+import { ToastContainer } from "react-toastify";
+import { handleFirebaseError } from "../../utils/firebaseErrorHandler";
 
 const SignUp = () => {
     const { user, signUp } = useUserAuth();
@@ -20,7 +21,7 @@ const SignUp = () => {
     const navigate = useNavigate();
     const fileRef = useRef(null);
     if (error) {
-        toastError();
+        toastError(error);
     }
 
     useEffect(() => {
@@ -61,7 +62,7 @@ const SignUp = () => {
             });
             navigate("/");
         } catch (err) {
-            setError(err.message);
+            handleFirebaseError(err.message, setError);
         }
     };
 
@@ -81,12 +82,12 @@ const SignUp = () => {
             validationSchema={SignUpSchema}
             onSubmit={(values) => handleSubmit(values)}
         >
-            {({ errors, touched, dirty, setFieldValue }) => (
+            {({ errors, touched, setFieldValue }) => (
                 <Form className="w-full mx-auto  h-screen pt-[100px] max-w-xs sm:max-w-sm md:max-w-lg lg:max-w-3xl">
                     <h1 className="relative text-[100px] text-5xl -z-10 -mb-[10px] font-logo">
                         Sign <span className="text-stroke text-white">Up</span>
                     </h1>
-                    {error && <p className="text-red-400">{error}</p>}
+                    <ToastContainer />
                     <div className="flex flex-wrap">
                         <Field
                             type="text"
