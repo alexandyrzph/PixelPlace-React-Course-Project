@@ -59,32 +59,40 @@ const PostDetails = () => {
                             </div>
                             <p>@{post?.ownerUsername}</p>
                         </div>
-                        <p className="text-md mt-2 mb-4">Likes {post?.likes ?? 0}</p>
+                        <p className="text-md mt-2 mb-4">
+                            Likes: <span className="font-bold">{post?.likes.length}</span>
+                        </p>
 
                         <h1 className="text-xl font-neu">{post?.title}</h1>
                         <div className="text-lg mb-2">{post?.description}</div>
-                        <h2 className="mt-5 text-lg">Comments</h2>
+                        <h2 className="mt-5 text-lg">Comments:</h2>
                         <div className="max-h-370 overflow-y-auto">
                             <div className="flex gap-2 mt-5 items-center bg-white rounded-lg">
-                                <img
-                                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                    className="w-10 h-10 rounded-full cursor-pointer"
-                                    alt="user-profile"
-                                />
-                                <div className="flex flex-col">
-                                    <p className="font-bold">@username</p>
-                                    <p>WOW this is a comments</p>
-                                </div>
+                                {post?.comments.length === 0 ? (
+                                    <p>No comments yet</p>
+                                ) : (
+                                    post?.comments.map((comment) => (
+                                        <>
+                                            <img
+                                                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                                className="w-10 h-10 rounded-full cursor-pointer"
+                                                alt="user-profile"
+                                            />
+                                            <div className="flex flex-col">
+                                                <p className="font-bold">@username</p>
+                                                <p>WOW this is a comments</p>
+                                            </div>
+                                        </>
+                                    ))
+                                )}
                             </div>
                         </div>
                         <div className="flex flex-wrap mt-6 gap-3">
-                            <Link to={`/user-profile/idOfUser`}>
-                                <img
-                                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                    className="w-10 h-10 rounded-full cursor-pointer"
-                                    alt="user-profile"
-                                />
-                            </Link>
+                            <img
+                                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                className="w-10 h-10 rounded-full"
+                                alt="user-profile"
+                            />
                             <input
                                 className="flex-1 bg-gray-100 border-neu-white outline-none border-2 p-2 rounded-md focus:border-gray-500"
                                 type="text"
