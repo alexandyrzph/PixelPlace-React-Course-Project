@@ -1,27 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUserAuth } from "../../context/UserAuthContext";
 import { PostItem } from "../../components";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../firebase";
-import Dots from "../../assets/26432.svg";
 import { BeatLoader } from "react-spinners";
+import Dots from "../../assets/26432.svg";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { db } from "../../firebase";
 
 const Posts = () => {
     const { user } = useUserAuth();
     const [isLoading, setIsLoading] = useState(false);
     const [posts, setPosts] = useState([]);
-    useState(() => {
-        setIsLoading(true);
-        getDocs(collection(db, "Posts"))
-            .then((snapshot) => {
-                let posts = [];
-                snapshot.forEach((doc) => {
-                    posts.push({ ...doc.data(), postId: doc.id });
-                    setIsLoading(false);
-                });
-                setPosts((prev) => posts);
-            })
-            .catch((err) => console.log(err.message));
+    useEffect(() => {
+        const q = query(collection(db, "Posts"), orderBy("timeStamp", "desc"));
+        onSnapshot(
+            q,
+            (snapshot) => {
+                const posts = snapshot.docs.map((post) => ({ postId: post.id, ...post.data() }));
+                setPosts(posts);
+            },
+            (err) => console.log(err),
+            () => setIsLoading(false)
+        );
     }, []);
 
     if (!isLoading) {

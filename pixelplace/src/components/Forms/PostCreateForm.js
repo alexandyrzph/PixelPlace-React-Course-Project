@@ -7,7 +7,6 @@ import { db, storage } from "../../firebase";
 import { addDoc, collection, doc, getDoc, serverTimestamp } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useUserAuth } from "../../context/UserAuthContext";
-import { uuidv4 } from "@firebase/util";
 
 const PostCreateForm = () => {
     const [image, setImage] = useState();
@@ -59,7 +58,8 @@ const PostCreateForm = () => {
                 ownerAvatarURL:
                     userInDb.photoURL ??
                     "https://firebasestorage.googleapis.com/v0/b/pixelplace-b8fac.appspot.com/o/1024px-Faenza-avatar-default-symbolic.svg.png?alt=media&token=986532b2-c109-4faf-b607-30ce2a1e1ff8",
-                postId: uuidv4(),
+                likes: [],
+                comments: [],
             });
             navigate("/posts");
         } catch (err) {

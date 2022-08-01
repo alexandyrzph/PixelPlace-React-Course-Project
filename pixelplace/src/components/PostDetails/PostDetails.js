@@ -1,21 +1,20 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import Dots from "../../assets/26432.svg";
-import { doc, getDoc } from "firebase/firestore";
 import { BeatLoader } from "react-spinners";
-import { db } from "../../firebase";
+import { getPostById } from "../../api/PostsAPI";
+import Dots from "../../assets/26432.svg";
 
 const PostDetails = () => {
     const [post, setPost] = useState();
     const [isLoading, setIsLoading] = useState(false);
+    const [currentUser, setCurrentUser] = useState("");
     const { postId } = useParams();
 
     useEffect(() => {
         setIsLoading(true);
-        const ref = doc(db, "Posts", postId);
-        getDoc(ref)
+        getPostById(postId)
             .then((data) => {
-                setPost((prev) => data.data());
+                setPost(data);
                 setIsLoading(false);
             })
             .catch((err) => console.log(err));
@@ -39,20 +38,25 @@ const PostDetails = () => {
         return (
             <div>
                 <div className="relative flex flex-col max-w-md sm:max-w-md md:max-w-xl mx-auto h-screen mt-16">
-                    <div className="mx-auto max-h-[300px] w-full object-cover">
+                    <div className="mx-auto max-h-[450px] w-full">
                         <img
                             src={post?.image}
                             alt="img"
-                            className="border-2 h-full w-full border-neu-black border-b-none rounded-t-xl rounded-b-none"
+                            className="border-2 h-full w-full object-cover border-neu-black border-b-none rounded-t-xl rounded-b-none"
                         />
                     </div>
                     <div className="relative border-2 border-t-none rounded-b-lg border-neu-black bg-white p-4">
                         <div className="flex justify-between mt-2">
-                            <img
-                                className="border-2 border-neu-black cursor-pointer inline-block h-9 w-9 rounded-full ring-2 ring-white"
-                                src={post?.ownerAvatarURL}
-                                alt=""
-                            />
+                            <div className="flex justify-center items-center gap-6">
+                                <img
+                                    className="border-2 border-neu-black cursor-pointer inline-block h-9 w-9 rounded-full ring-2 ring-white"
+                                    src={post?.ownerAvatarURL}
+                                    alt=""
+                                />
+                                <p className="border-2 px-4 rounded-full text-gray-300 bg-neu-black">
+                                    {post?.category}
+                                </p>
+                            </div>
                             <p>@{post?.ownerUsername}</p>
                         </div>
                         <p className="text-md mt-2 mb-4">Likes {post?.likes ?? 0}</p>

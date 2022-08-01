@@ -1,15 +1,18 @@
 import { Link } from "react-router-dom";
-import { AiFillLike } from "react-icons/ai";
-import { useState } from "react";
+import Like from "../Like/Like";
 
-const PostItem = ({ ownerUsername, image, title, description, user, ownerAvatarURL, postId }) => {
-    const [liked, setLiked] = useState(false);
-    const onLikeHandler = () => {
-        setLiked((liked) => !liked);
-    };
-
+const PostItem = ({
+    ownerUsername,
+    image,
+    title,
+    description,
+    user,
+    ownerAvatarURL,
+    postId,
+    likes,
+}) => {
     return (
-        <div className="break-inside mb-4">
+        <div className="break-inside mb-4 shadow-md rounded-lg shadow-gray-300">
             <div className=" bg-white rounded-lg border-2 border-neu-black">
                 <div className="p-2 flex items-center">
                     <img className="w-10 rounded-full mr-4" src={ownerAvatarURL} alt="" />
@@ -25,14 +28,7 @@ const PostItem = ({ ownerUsername, image, title, description, user, ownerAvatarU
                         </h5>
                     </Link>
                     <p className="mb-3 font-normal text-gray-700 truncate">{description}</p>
-                    {user && (
-                        <AiFillLike
-                            size={"1.8rem"}
-                            onClick={onLikeHandler}
-                            color={liked ? "red" : ""}
-                            className="mb-2 mt-4 cursor-pointer duration-100"
-                        />
-                    )}
+                    {user && <Like postId={postId} likes={likes} />}
 
                     <div className="inline-flex items-center">
                         <Link to={postId}>
