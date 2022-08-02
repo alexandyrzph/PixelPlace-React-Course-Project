@@ -5,11 +5,17 @@ import { getPostById } from "../../api/PostsAPI";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { useUserAuth } from "../../context/UserAuthContext";
 import { Transition } from "@tailwindui/react";
+import { ToastContainer } from "react-toastify";
+import { toastError } from "../../utils/Toast";
 import { db } from "../../firebase";
-import { deleteDoc, doc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDocs, onSnapshot } from "firebase/firestore";
+import Comment from "../Comment/Comment";
+import { uuidv4 } from "@firebase/util";
 
 const PostDetails = () => {
     const { user } = useUserAuth();
+    const [comment, setComment] = useState("");
+    const [comments, setComments] = useState([]);
     const { postId } = useParams();
     const [post, setPost] = useState();
     const [isLoading, setIsLoading] = useState(false);
@@ -28,21 +34,12 @@ const PostDetails = () => {
     }, [postId]);
 
     useEffect(() => {
-        if (post) {
-            const handleOutsideClick = (event) => {
-                if (!menuRef.current.contains(event.target)) {
-                    if (!dropdownShow) return;
-                    setDropdownShow(false);
-                }
-            };
-
-            window.addEventListener("click", handleOutsideClick);
-            return () => window.removeEventListener("click", handleOutsideClick);
-        }
-    }, [post, dropdownShow, menuRef]);
-
-    const [comment, setComment] = useState("");
-    const [addingComment, setAddingComment] = useState(false);
+        onSnapshot(collection(db, "Posts", postId, "comments"), (snapshot) => {
+            const commentsArray = [];
+            snapshot.forEach((commentSnap) => commentsArray.push(commentSnap.data()));
+            setComments(commentsArray);
+        });
+    }, [postId]);
 
     const deletePostHandler = () => {
         deleteDoc(doc(db, "Posts", postId)).then(() => {
@@ -50,11 +47,21 @@ const PostDetails = () => {
         });
     };
 
-    const addComment = () => {
-        if (comment) {
-            setAddingComment(true);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (comment.length < 3) {
+            toastError("Comment must be at least 3 characters long.");
+            return;
         }
+        const { photoURL, displayName, uid } = user;
+        const commentData = { uid, photoURL, displayName, comment };
+        console.log(commentData);
+
+        addDoc(collection(db, "Posts", postId, `comments`), commentData)
+            .then()
+            .catch((err) => toastError(err));
     };
+
     if (isLoading) {
         return (
             <div className="flex justify-center items-center h-screen bg-neu-white">
@@ -64,6 +71,7 @@ const PostDetails = () => {
     } else {
         return (
             <div>
+                <ToastContainer />
                 <div className="relative flex flex-col max-w-md sm:max-w-md md:max-w-xl mx-auto h-screen mt-16">
                     <div className="mx-auto max-h-[450px] w-full">
                         <img
@@ -133,46 +141,39 @@ const PostDetails = () => {
 
                         <h2 className="mt-5 text-lg">Comments:</h2>
                         <div className="max-h-370 overflow-y-auto">
-                            <div className="flex gap-2 mt-5 items-center bg-white rounded-lg">
-                                {post?.comments?.length === 0 ? (
+                            <div className="flex flex-col gap-2 mt-5 bg-white rounded-lg">
+                                {comments.length === 0 ? (
                                     <p>No comments yet</p>
                                 ) : (
-                                    post?.comments?.map((comment) => (
-                                        <>
-                                            <img
-                                                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                                className="w-10 h-10 rounded-full cursor-pointer"
-                                                alt="user-profile"
-                                            />
-                                            <div className="flex flex-col">
-                                                <p className="font-bold">@username</p>
-                                                <p>WOW this is a comments</p>
-                                            </div>
-                                        </>
-                                    ))
+                                    comments.map((comment) => <Comment {...comment} key={uuidv4()} />)
                                 )}
                             </div>
                         </div>
                         <div className="flex flex-wrap mt-6 items-center gap-3">
-                            <img
-                                src={user.photoURL}
-                                className="w-9 h-9 items-center object-cover object-center rounded-full"
-                                alt="user-profile"
-                            />
-                            <input
-                                className="flex-1 bg-gray-100 border-neu-white outline-none border-2 p-2 rounded-md focus:border-gray-500"
-                                type="text"
-                                placeholder="Add a comment"
-                                value={comment}
-                                onChange={(e) => setComment(e.target.value)}
-                            />
-                            <button
-                                type="button"
-                                className="bg-neu-yellow text-neu-black border-2 border-neu-black hover:shadow-[2px_2px_2px] duration-75 rounded-md px-6 py-2 font-semibold text-base outline-none"
-                                onClick={addComment}
+                            <form
+                                onSubmit={handleSubmit}
+                                className="flex flex-wrap w-full items-center gap-2"
                             >
-                                {addingComment ? "Doing..." : "Done"}
-                            </button>
+                                <img
+                                    src={user.photoURL}
+                                    className="w-9 h-9 items-center object-cover object-center rounded-full"
+                                    alt="user-profile"
+                                />
+                                <input
+                                    className="flex-1 bg-gray-100 border-neu-white outline-none border-2 p-2 rounded-md focus:border-gray-500"
+                                    type="text"
+                                    placeholder="Add a comment"
+                                    value={comment}
+                                    onChange={(e) => setComment(e.target.value)}
+                                />
+                                <button
+                                    type="button"
+                                    className="bg-neu-yellow text-neu-black border-2 border-neu-black hover:shadow-[2px_2px_2px] duration-75 rounded-md px-6 py-2 font-semibold text-base outline-none"
+                                    onClick={handleSubmit}
+                                >
+                                    Send
+                                </button>
+                            </form>
                         </div>
                         <img
                             className="hidden lg:block absolute bottom-5 -right-20 opacity-10 -z-10 w-[200px]"

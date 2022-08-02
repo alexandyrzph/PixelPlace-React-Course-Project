@@ -4,5 +4,5 @@ import { db } from "../firebase";
 export const getPostById = async (postId) => {
     const ref = doc(db, "Posts", postId);
     const post = await getDoc(ref);
-    if (post.exists()) return post.data();
+    return post.data();
 };
