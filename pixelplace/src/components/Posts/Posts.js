@@ -27,7 +27,7 @@ const Posts = () => {
         return (
             <div className="relative max-w-md px-1 md:px-0 sm:max-w-lg md:max-w-xl lg:max-w-3xl xl:max-w-5xl 2xl:max-w-7xl mx-auto w-full h-screen py-16">
                 <div className="masonry sm:masonry-sm md:masonry-md lg:masonry-lg">
-                    {posts.length > 0 ? (
+                    {posts && posts.length > 0 ? (
                         posts.map((post) => <PostItem key={post.postId} {...post} user={user} />)
                     ) : (
                         <div>

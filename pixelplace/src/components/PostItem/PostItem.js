@@ -1,6 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Like from "../Like/Like";
 import { HiDotsHorizontal } from "react-icons/hi";
+import { Transition } from "@tailwindui/react";
+import { useEffect, useRef, useState } from "react";
+import { deleteDoc, doc } from "firebase/firestore";
+import { db } from "../../firebase";
 
 const PostItem = ({
     ownerUsername,
@@ -13,6 +17,31 @@ const PostItem = ({
     likes,
     ownerId,
 }) => {
+    const [dropdownShow, setDropdownShow] = useState(false);
+    const menuRef = useRef(null);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const handleOutsideClick = (event) => {
+            // debugger;
+            if (dropdownShow) {
+                if (!menuRef.current.contains(event.target)) {
+                    if (!dropdownShow) return;
+                    setDropdownShow(false);
+                }
+            }
+        };
+
+        window.addEventListener("click", handleOutsideClick);
+        return () => window.removeEventListener("click", handleOutsideClick);
+    }, [postId, dropdownShow, menuRef]);
+
+    const deletePostHandler = () => {
+        deleteDoc(doc(db, "Posts", postId)).then(() => {
+            navigate("/posts");
+        });
+    };
+
     return (
         <div className="break-inside mb-4 shadow-md rounded-lg shadow-gray-300">
             <div className=" bg-white rounded-lg border-2 border-neu-black">
@@ -25,7 +54,42 @@ const PostItem = ({
                         />
                         <p>{ownerUsername}</p>
                     </div>
-                    {user && user.uid === ownerId ? <HiDotsHorizontal cursor={"pointer"} /> : null}
+                    {user && user.uid === ownerId ? (
+                        <div ref={menuRef} className="relative">
+                            <HiDotsHorizontal
+                                cursor={"pointer"}
+                                onClick={() => setDropdownShow(!dropdownShow)}
+                            />
+                            <Transition
+                                show={dropdownShow}
+                                enter="transition ease-out duration-100 transform"
+                                enterFrom="opacity-0 scale-95"
+                                enterTo="opacity-100 scale-100"
+                                leave="transition ease-in duration-75 transform"
+                                leaveFrom="opacity-100 scale-100"
+                                leaveTo="opacity-0 scale-95"
+                            >
+                                <div className="absolute z-[200] right-0 max-w-fit  mt-1 bg-white rounded hover:shadow-[2px_2px_2px] border-2 border-neu-black duration-150">
+                                    <Link to={`/posts/${postId}/edit`}>
+                                        <p className="block px-4 py-2 hover:bg-neu-yellow hover:text-neu-black duration-150 truncate">
+                                            Edit Post
+                                        </p>
+                                    </Link>
+                                    <hr />
+                                    <button
+                                        onClick={() => {
+                                            deletePostHandler();
+                                        }}
+                                        className="text-left w-full"
+                                    >
+                                        <p className="block px-4 py-2 hover:bg-red-500 hover:text-neu-black duration-75">
+                                            Delete
+                                        </p>
+                                    </button>
+                                </div>
+                            </Transition>
+                        </div>
+                    ) : null}
                 </div>
                 <Link to={postId}>
                     <img src={image} alt="" />

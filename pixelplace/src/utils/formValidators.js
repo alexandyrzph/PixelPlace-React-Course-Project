@@ -22,7 +22,7 @@ export const SignInSchema = Yup.object().shape({
         .required("Password is required!"),
 });
 
-export const CreatePostSchema = Yup.object().shape({
+export const CreateEditPostSchema = Yup.object().shape({
     title: Yup.string()
         .min(4, "Title must be at least 4 characters long")
         .required("Title is required"),

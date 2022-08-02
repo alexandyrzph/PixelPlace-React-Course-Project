@@ -1,10 +1,10 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import { CreatePostSchema } from "../../utils/formValidators";
+import { Formik, Form, Field } from "formik";
+import { CreateEditPostSchema } from "../../utils/formValidators";
 import { useEffect, useRef, useState } from "react";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { db, storage } from "../../firebase";
-import { addDoc, collection, doc, getDoc, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useUserAuth } from "../../context/UserAuthContext";
 import { BsShieldFillExclamation } from "react-icons/bs";
@@ -68,7 +68,7 @@ const PostCreateForm = () => {
                 category: "",
                 image: null,
             }}
-            validationSchema={CreatePostSchema}
+            validationSchema={CreateEditPostSchema}
             onSubmit={(values) => handleSubmit(values)}
         >
             {({ touched, errors, setFieldValue }) => (

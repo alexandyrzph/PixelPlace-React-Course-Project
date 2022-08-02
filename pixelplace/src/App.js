@@ -45,7 +45,7 @@ function App() {
                     />
                     <Route path="posts/:postId" element={<PostDetails />} />
                     <Route
-                        path="post-edit/:postId"
+                        path="posts/:postId/edit"
                         element={
                             <ProtectedRoute>
                                 <PostEdit />

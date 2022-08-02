@@ -1,16 +1,22 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
 import { getPostById } from "../../api/PostsAPI";
 import Dots from "../../assets/26432.svg";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { useUserAuth } from "../../context/UserAuthContext";
+import { Transition } from "@tailwindui/react";
+import { db } from "../../firebase";
+import { deleteDoc, doc } from "firebase/firestore";
 
 const PostDetails = () => {
     const { user } = useUserAuth();
+    const { postId } = useParams();
     const [post, setPost] = useState();
     const [isLoading, setIsLoading] = useState(false);
-    const { postId } = useParams();
+    const [dropdownShow, setDropdownShow] = useState(false);
+    const menuRef = useRef(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         setIsLoading(true);
@@ -22,8 +28,28 @@ const PostDetails = () => {
             .catch((err) => console.log(err));
     }, [postId]);
 
+    useEffect(() => {
+        if (post) {
+            const handleOutsideClick = (event) => {
+                if (!menuRef.current.contains(event.target)) {
+                    if (!dropdownShow) return;
+                    setDropdownShow(false);
+                }
+            };
+
+            window.addEventListener("click", handleOutsideClick);
+            return () => window.removeEventListener("click", handleOutsideClick);
+        }
+    }, [post, dropdownShow, menuRef]);
+
     const [comment, setComment] = useState("");
     const [addingComment, setAddingComment] = useState(false);
+
+    const deletePostHandler = () => {
+        deleteDoc(doc(db, "Posts", postId)).then(() => {
+            navigate("/posts");
+        });
+    };
 
     const addComment = () => {
         if (comment) {
@@ -50,7 +76,42 @@ const PostDetails = () => {
                     <div className="relative border-2 border-t-none rounded-b-lg border-neu-black bg-white p-4">
                         <div className="flex justify-between">
                             <h1 className="text-xl font-neu">{post?.title}</h1>
-                            <HiDotsHorizontal className="" />
+                            {user && user.uid === post?.ownerId ? (
+                                <div ref={menuRef} className="relative">
+                                    <HiDotsHorizontal
+                                        cursor={"pointer"}
+                                        onClick={() => setDropdownShow(!dropdownShow)}
+                                    />
+                                    <Transition
+                                        show={dropdownShow}
+                                        enter="transition ease-out duration-100 transform"
+                                        enterFrom="opacity-0 scale-95"
+                                        enterTo="opacity-100 scale-100"
+                                        leave="transition ease-in duration-75 transform"
+                                        leaveFrom="opacity-100 scale-100"
+                                        leaveTo="opacity-0 scale-95"
+                                    >
+                                        <div className="absolute z-[200] right-0 max-w-fit  mt-1 bg-white rounded hover:shadow-[2px_2px_2px] border-2 border-neu-black duration-150">
+                                            <Link to="edit">
+                                                <p className="block px-4 py-2 hover:bg-neu-yellow hover:text-neu-black duration-150 truncate">
+                                                    Edit Post
+                                                </p>
+                                            </Link>
+                                            <hr />
+                                            <button
+                                                onClick={() => {
+                                                    deletePostHandler();
+                                                }}
+                                                className="text-left w-full"
+                                            >
+                                                <p className="block px-4 py-2 hover:bg-red-500 hover:text-neu-black duration-75">
+                                                    Delete
+                                                </p>
+                                            </button>
+                                        </div>
+                                    </Transition>
+                                </div>
+                            ) : null}
                         </div>
                         <div className="text-lg mb-2">{post?.description}</div>
 
