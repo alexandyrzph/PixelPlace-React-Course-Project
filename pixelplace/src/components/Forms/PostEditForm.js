@@ -2,7 +2,7 @@ import { Formik, Form, Field } from "formik";
 import { CreateEditPostSchema } from "../../utils/formValidators";
 import { useEffect, useRef, useState } from "react";
 import { AiOutlineCloudUpload } from "react-icons/ai";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { db, storage } from "../../firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -19,6 +19,7 @@ const PostEditForm = () => {
     const { user } = useUserAuth();
     const fileRef = useRef(null);
     const { postId } = useParams();
+
 
     useEffect(() => {
         if (image) {
@@ -39,7 +40,12 @@ const PostEditForm = () => {
             })
             .catch((err) => console.log(err));
     }, [postId]);
+
     
+    if (post?.ownerId !== user.uid) {
+        return <Navigate to="/" />
+    }
+
     const uploadImage = async (image) => {
         const imageRef = ref(storage, `${new Date().getTime() + image.name}`);
         try {
