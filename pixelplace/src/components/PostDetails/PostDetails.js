@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
 import { getPostById } from "../../api/PostsAPI";
-import Dots from "../../assets/26432.svg";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { useUserAuth } from "../../context/UserAuthContext";
 import { Transition } from "@tailwindui/react";
@@ -70,7 +69,7 @@ const PostDetails = () => {
                         <img
                             src={post?.image}
                             alt="img"
-                            className="border-2 h-full w-full object-cover border-neu-black border-b-none rounded-t-xl rounded-b-none"
+                            className="border-2 bg-white h-full w-full object-cover object-center border-neu-black border-b-none rounded-t-xl rounded-b-none"
                         />
                     </div>
                     <div className="relative border-2 border-t-none rounded-b-lg border-neu-black bg-white p-4">
@@ -177,13 +176,13 @@ const PostDetails = () => {
                         </div>
                         <img
                             className="hidden lg:block absolute bottom-5 -right-20 opacity-10 -z-10 w-[200px]"
-                            src={Dots}
+                            src="https://firebasestorage.googleapis.com/v0/b/pixelplace-b8fac.appspot.com/o/26432.svg?alt=media&token=17971521-81ad-4e86-bd5b-f0051d4c5a13"
                             alt="Dots"
                         />
                     </div>
                     <img
                         className="hidden lg:block absolute top-5 -left-20 opacity-10 -z-10 w-[200px]"
-                        src={Dots}
+                        src="https://firebasestorage.googleapis.com/v0/b/pixelplace-b8fac.appspot.com/o/26432.svg?alt=media&token=17971521-81ad-4e86-bd5b-f0051d4c5a13"
                         alt="Dots"
                     />
                 </div>

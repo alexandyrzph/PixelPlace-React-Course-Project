@@ -20,7 +20,6 @@ const PostEditForm = () => {
     const fileRef = useRef(null);
     const { postId } = useParams();
 
-
     useEffect(() => {
         if (image) {
             const reader = new FileReader();
@@ -41,9 +40,8 @@ const PostEditForm = () => {
             .catch((err) => console.log(err));
     }, [postId]);
 
-    
     if (post?.ownerId !== user.uid) {
-        return <Navigate to="/" />
+        return <Navigate to="/" />;
     }
 
     const uploadImage = async (image) => {
@@ -169,7 +167,7 @@ const PostEditForm = () => {
                                             id="image"
                                             src={preview ?? imageReceived}
                                             alt="preview"
-                                            className="h-[250px] max-w-sm object-cover object-center p-2 z-10 hover:brightness-50 cursor-pointer duration-100"
+                                            className="h-[250px] bg-white max-w-sm object-cover object-center p-2 z-10 hover:brightness-50 cursor-pointer duration-100"
                                             onClick={(e) => {
                                                 setImage(null);
                                                 setImageReceived(null);
