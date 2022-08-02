@@ -40,10 +40,11 @@ const PostEditForm = () => {
             .catch((err) => console.log(err));
     }, [postId]);
 
-    if (post?.ownerId !== user.uid) {
+
+    if (post && post?.ownerId !== user.uid) {
         return <Navigate to="/" />;
     }
-
+    
     const uploadImage = async (image) => {
         const imageRef = ref(storage, `${new Date().getTime() + image.name}`);
         try {
