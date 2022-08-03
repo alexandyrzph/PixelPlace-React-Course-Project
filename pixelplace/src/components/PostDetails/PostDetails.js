@@ -146,7 +146,12 @@ const PostDetails = () => {
                                     <p>No comments yet</p>
                                 ) : (
                                     comments.map((comment) => (
-                                        <Comment {...comment} key={uuidv4()} postId={postId} />
+                                        <Comment
+                                            {...comment}
+                                            key={uuidv4()}
+                                            postId={postId}
+                                            currentUserId={user.uid}
+                                        />
                                     ))
                                 )}
                             </div>

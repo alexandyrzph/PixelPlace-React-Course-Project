@@ -4,7 +4,7 @@ import { ToastContainer } from "react-toastify";
 import { toastError } from "../../utils/Toast";
 import { HiX } from "react-icons/hi";
 
-const Comment = ({ photoURL, displayName, comment, commentId, uid, postId }) => {
+const Comment = ({ photoURL, displayName, comment, commentId, uid, currentUserId, postId }) => {
     const deleteCommentHandler = (e) => {
         deleteDoc(doc(db, "Posts", postId, "comments", commentId))
             .then()
@@ -23,11 +23,13 @@ const Comment = ({ photoURL, displayName, comment, commentId, uid, postId }) => 
                 <p className="w-full font-bold">@{displayName}</p>
                 <p className="w-full">{comment}</p>
             </div>
-            <HiX
-                cursor={"pointer"}
-                onClick={deleteCommentHandler}
-                className="hover:bg-slate-300 text-lg text-gray-500 hover:text-black rounded-full duration-100"
-            />
+            {currentUserId == uid ? (
+                <HiX
+                    cursor={"pointer"}
+                    onClick={deleteCommentHandler}
+                    className="hover:bg-slate-300 text-lg text-gray-500 hover:text-black rounded-full duration-100"
+                />
+            ) : null}
         </div>
     );
 };
