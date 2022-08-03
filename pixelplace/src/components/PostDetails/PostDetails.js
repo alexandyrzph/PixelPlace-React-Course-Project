@@ -35,9 +35,11 @@ const PostDetails = () => {
 
     useEffect(() => {
         onSnapshot(collection(db, "Posts", postId, "comments"), (snapshot) => {
-            const commentsArray = [];
-            snapshot.forEach((commentSnap) => commentsArray.push(commentSnap.data()));
-            setComments(commentsArray);
+            const commentSnap = snapshot.docs.map((comment) => ({
+                ...comment.data(),
+                commentId: comment.id,
+            }));
+            setComments(commentSnap);
         });
     }, [postId]);
 
@@ -60,7 +62,7 @@ const PostDetails = () => {
         addDoc(collection(db, "Posts", postId, `comments`), commentData)
             .then()
             .catch((err) => toastError(err));
-        setComment('');
+        setComment("");
     };
 
     if (isLoading) {
@@ -144,7 +146,7 @@ const PostDetails = () => {
                                     <p>No comments yet</p>
                                 ) : (
                                     comments.map((comment) => (
-                                        <Comment {...comment} key={uuidv4()} />
+                                        <Comment {...comment} key={uuidv4()} postId={postId} />
                                     ))
                                 )}
                             </div>

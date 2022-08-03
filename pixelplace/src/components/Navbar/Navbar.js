@@ -35,7 +35,7 @@ const Navbar = () => {
 
     return (
         <div className="bg-neu-white w-full shadow-md">
-            <ul className="flex justify-between items-center max-w-md px-2 md:px-0 sm:max-w-lg md:max-w-xl lg:max-w-3xl xl:max-w-5xl 2xl:max-w-7xl mx-auto w-full py-1">
+            <ul className="flex justify-between items-center max-w-md px-2 md:px-0 sm:max-w-lg md:max-w-xl lg:max-w-3xl xl:max-w-5xl 2xl:max-w-7xl mx-auto w-full py-2">
                 <li>
                     <Link
                         className="text-2xl font-logo tracking-wider text-[#2e2e2e] hover:text-black duration-200"
@@ -116,7 +116,7 @@ const Navbar = () => {
                             </li>
                             <li>
                                 <Link
-                                    className="bg-neu-black text-neu-white hover:bg-black duration-150 px-4 py-3 rounded-3xl"
+                                    className="bg-neu-black text-neu-white hover:bg-black duration-150 px-4 py-2 rounded-3xl"
                                     to="/register"
                                 >
                                     Sign Up
