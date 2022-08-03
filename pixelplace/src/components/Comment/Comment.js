@@ -23,7 +23,7 @@ const Comment = ({ photoURL, displayName, comment, commentId, uid, currentUserId
                 <p className="w-full font-bold">@{displayName}</p>
                 <p className="w-full">{comment}</p>
             </div>
-            {currentUserId == uid ? (
+            {currentUserId === uid ? (
                 <HiX
                     cursor={"pointer"}
                     onClick={deleteCommentHandler}

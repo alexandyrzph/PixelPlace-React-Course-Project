@@ -7,7 +7,17 @@ import { ToastContainer } from "react-toastify";
 import { getPostById } from "../../api/PostsAPI";
 import { toastError } from "../../utils/Toast";
 import { db } from "../../firebase";
-import { addDoc, collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
+import {
+    addDoc,
+    collection,
+    deleteDoc,
+    doc,
+    onSnapshot,
+    orderBy,
+    query,
+    serverTimestamp,
+    where,
+} from "firebase/firestore";
 import { uuidv4 } from "@firebase/util";
 import Comment from "../Comment/Comment";
 import { Transition } from "@tailwindui/react";
@@ -34,13 +44,17 @@ const PostDetails = () => {
     }, [postId]);
 
     useEffect(() => {
-        onSnapshot(collection(db, "Posts", postId, "comments"), (snapshot) => {
-            const commentSnap = snapshot.docs.map((comment) => ({
-                ...comment.data(),
-                commentId: comment.id,
-            }));
-            setComments(commentSnap);
-        });
+        onSnapshot(
+            query(collection(db, "Posts", postId, "comments")),
+            orderBy("timeStamp", "desc"),
+            (snapshot) => {
+                const commentSnap = snapshot.docs.map((comment) => ({
+                    ...comment.data(),
+                    commentId: comment.id,
+                }));
+                setComments(commentSnap);
+            }
+        );
     }, [postId]);
 
     const deletePostHandler = () => {
@@ -56,9 +70,7 @@ const PostDetails = () => {
             return;
         }
         const { photoURL, displayName, uid } = user;
-        const commentData = { uid, photoURL, displayName, comment };
-        console.log(commentData);
-
+        const commentData = { uid, photoURL, displayName, comment, timeStamp: serverTimestamp() };
         addDoc(collection(db, "Posts", postId, `comments`), commentData)
             .then()
             .catch((err) => toastError(err));
@@ -73,7 +85,7 @@ const PostDetails = () => {
         );
     } else {
         return (
-            <div>
+            <div className="">
                 <ToastContainer />
                 <div className="relative flex flex-col max-w-md sm:max-w-md md:max-w-xl mx-auto h-screen mt-16">
                     <div className="mx-auto max-h-[450px] w-full">
@@ -126,7 +138,7 @@ const PostDetails = () => {
                         <div className="flex justify-between mt-4">
                             <div className="flex justify-center items-center gap-6">
                                 <img
-                                    className="border-2 border-neu-black cursor-pointer inline-block h-9 w-9 rounded-full ring-2 ring-white"
+                                    className="border-2 border-neu-black  cursor-pointer inline-block h-9 w-9 rounded-full ring-2 ring-white"
                                     src={post?.ownerAvatarURL}
                                     alt="avatarImage"
                                 />

@@ -91,11 +91,11 @@ const PostItem = ({
                         </div>
                     ) : null}
                 </div>
-                <Link to={postId}>
+                <Link to={`/posts/${postId}`}>
                     <img src={image} alt="" />
                 </Link>
                 <div className="p-5">
-                    <Link to="#">
+                    <Link to={`/posts/${postId}`}>
                         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">
                             {title}
                         </h5>
@@ -109,7 +109,7 @@ const PostItem = ({
                     )}
 
                     <div className="inline-flex items-center">
-                        <Link to={postId}>
+                        <Link to={`/posts/${postId}`}>
                             <button className="relative flex-grow-1 w-full lg:w-full hover:shadow-neu-shadow hover:-translate-y-1 duration-200 border-2 outline-none border-neu-black px-6 py-3 rounded-lg bg-neu-yellow font-bold">
                                 Read More
                             </button>
