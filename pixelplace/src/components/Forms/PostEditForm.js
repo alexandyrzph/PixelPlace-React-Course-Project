@@ -1,3 +1,4 @@
+import { useUserAuth } from "../../context/UserAuthContext";
 import { Formik, Form, Field } from "formik";
 import { CreateEditPostSchema } from "../../utils/formValidators";
 import { useEffect, useRef, useState } from "react";
@@ -6,7 +7,6 @@ import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { db, storage } from "../../firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { useUserAuth } from "../../context/UserAuthContext";
 import { BsShieldFillExclamation } from "react-icons/bs";
 import { getPostById } from "../../api/PostsAPI";
 
@@ -40,11 +40,10 @@ const PostEditForm = () => {
             .catch((err) => console.log(err));
     }, [postId]);
 
-
     if (post && post?.ownerId !== user.uid) {
         return <Navigate to="/" />;
     }
-    
+
     const uploadImage = async (image) => {
         const imageRef = ref(storage, `${new Date().getTime() + image.name}`);
         try {

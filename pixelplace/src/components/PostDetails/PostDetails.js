@@ -1,22 +1,22 @@
+import { useUserAuth } from "../../context/UserAuthContext";
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
-import { getPostById } from "../../api/PostsAPI";
 import { HiDotsHorizontal } from "react-icons/hi";
-import { useUserAuth } from "../../context/UserAuthContext";
-import { Transition } from "@tailwindui/react";
 import { ToastContainer } from "react-toastify";
+import { getPostById } from "../../api/PostsAPI";
 import { toastError } from "../../utils/Toast";
 import { db } from "../../firebase";
-import { addDoc, collection, deleteDoc, doc, getDocs, onSnapshot } from "firebase/firestore";
-import Comment from "../Comment/Comment";
+import { addDoc, collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
 import { uuidv4 } from "@firebase/util";
+import Comment from "../Comment/Comment";
+import { Transition } from "@tailwindui/react";
 
 const PostDetails = () => {
     const { user } = useUserAuth();
+    const { postId } = useParams();
     const [comment, setComment] = useState("");
     const [comments, setComments] = useState([]);
-    const { postId } = useParams();
     const [post, setPost] = useState();
     const [isLoading, setIsLoading] = useState(false);
     const [dropdownShow, setDropdownShow] = useState(false);
@@ -60,6 +60,7 @@ const PostDetails = () => {
         addDoc(collection(db, "Posts", postId, `comments`), commentData)
             .then()
             .catch((err) => toastError(err));
+        setComment('');
     };
 
     if (isLoading) {
@@ -106,9 +107,7 @@ const PostDetails = () => {
                                             </Link>
                                             <hr />
                                             <button
-                                                onClick={() => {
-                                                    deletePostHandler();
-                                                }}
+                                                onClick={() => deletePostHandler()}
                                                 className="text-left w-full"
                                             >
                                                 <p className="block px-4 py-2 hover:bg-red-500 hover:text-neu-black duration-75">
@@ -127,7 +126,7 @@ const PostDetails = () => {
                                 <img
                                     className="border-2 border-neu-black cursor-pointer inline-block h-9 w-9 rounded-full ring-2 ring-white"
                                     src={post?.ownerAvatarURL}
-                                    alt=""
+                                    alt="avatarImage"
                                 />
                                 <p className="border-2 px-4 rounded-full text-gray-300 bg-neu-black">
                                     {post?.category}
@@ -138,14 +137,15 @@ const PostDetails = () => {
                         <p className="text-md mt-2 mb-4">
                             Likes: <span className="font-bold">{post?.likes.length}</span>
                         </p>
-
                         <h2 className="mt-5 text-lg">Comments:</h2>
                         <div className="max-h-370 overflow-y-auto">
                             <div className="flex flex-col gap-2 mt-5 bg-white rounded-lg">
                                 {comments.length === 0 ? (
                                     <p>No comments yet</p>
                                 ) : (
-                                    comments.map((comment) => <Comment {...comment} key={uuidv4()} />)
+                                    comments.map((comment) => (
+                                        <Comment {...comment} key={uuidv4()} />
+                                    ))
                                 )}
                             </div>
                         </div>

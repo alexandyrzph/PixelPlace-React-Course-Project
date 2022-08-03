@@ -5,13 +5,13 @@ import { AiOutlineCloudUpload } from "react-icons/ai";
 import { BsShieldFillExclamation } from "react-icons/bs";
 import { Formik, Form, Field } from "formik";
 import { SignUpSchema } from "../../utils/formValidators";
-import { doc, setDoc } from "firebase/firestore";
+import { addDoc, doc } from "firebase/firestore";
 import { db, storage } from "../../firebase";
+import { handleFirebaseError } from "../../utils/firebaseErrorHandler";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
 import { toastError } from "../../utils/Toast";
 import { ToastContainer } from "react-toastify";
-import { handleFirebaseError } from "../../utils/firebaseErrorHandler";
 
 const SignUp = () => {
     const { user, signUp } = useUserAuth();
@@ -56,7 +56,7 @@ const SignUp = () => {
                 photoURL: url,
                 displayName: username,
             });
-            await setDoc(doc(db, "Users", res.user.uid), {
+            await addDoc(doc(db, "Users", res.user.uid), {
                 username,
                 email,
             });

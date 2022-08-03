@@ -1,10 +1,10 @@
-import { Link, useNavigate } from "react-router-dom";
-import Like from "../Like/Like";
-import { HiDotsHorizontal } from "react-icons/hi";
-import { Transition } from "@tailwindui/react";
 import { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { HiDotsHorizontal } from "react-icons/hi";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase";
+import { Transition } from "@tailwindui/react";
+import Like from "../Like/Like";
 
 const PostItem = ({
     ownerUsername,
