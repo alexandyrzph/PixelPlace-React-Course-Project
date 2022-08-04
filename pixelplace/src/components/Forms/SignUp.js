@@ -184,6 +184,7 @@ const SignUp = () => {
                             </p>
                         ) : null}
                         <Field
+                            autoComplete="on"
                             type="password"
                             name="password"
                             className={`border-2 mt-3 w-full outline-none bg-white focus:shadow-[2px_2px_2px] duration-150 rounded-md ${
@@ -200,6 +201,7 @@ const SignUp = () => {
                             </p>
                         ) : null}
                         <Field
+                            autoComplete="on"
                             type="password"
                             name="repass"
                             className={`border-2 mt-3 w-full outline-none bg-white focus:shadow-[2px_2px_2px] duration-150 rounded-md ${

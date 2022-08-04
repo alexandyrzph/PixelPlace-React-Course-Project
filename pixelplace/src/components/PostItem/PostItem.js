@@ -42,7 +42,7 @@ const PostItem = ({
     };
 
     return (
-        <div className="break-inside mb-4 shadow-xl lg:hover:-translate-y-[1px] duration-300">
+        <div className="break-inside mb-4 lg:hover:-translate-y-[1px] duration-300">
             <div className="bg-white rounded-lg border-2 border-neu-black">
                 <div className="flex justify-between items-center">
                     <div className="flex p-2 items-center">

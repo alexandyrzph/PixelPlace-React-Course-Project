@@ -88,14 +88,17 @@ const Navbar = () => {
                                                 </p>
                                                 <hr />
                                             </div>
-                                            <Link to="/profile">
+                                            <Link onClick={() => setShow(false)} to="/profile">
                                                 <p className="block px-4 py-2 hover:bg-neu-yellow hover:text-neu-black duration-150">
                                                     Profile
                                                 </p>
                                             </Link>
                                             <hr />
                                             <button
-                                                onClick={logoutHandler}
+                                                onClick={() => {
+                                                    logoutHandler();
+                                                    setShow(false);
+                                                }}
                                                 className="text-left w-full"
                                             >
                                                 <p className="block px-4 py-2 hover:bg-neu-yellow hover:text-neu-black duration-75">

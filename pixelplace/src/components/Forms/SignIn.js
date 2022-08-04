@@ -58,7 +58,8 @@ const SignIn = () => {
                                 {errors.email}
                             </p>
                         ) : null}
-                        <Field
+                        <Field 
+                            autoComplete="on"
                             type="password"
                             name="password"
                             className={`border-2 mt-3 w-full outline-none bg-white focus:shadow-[2px_2px_0px] duration-150 rounded-md ${
