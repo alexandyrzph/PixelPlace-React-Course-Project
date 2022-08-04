@@ -52,7 +52,6 @@ const PostCreateForm = () => {
                     user.photoURL ??
                     "https://firebasestorage.googleapis.com/v0/b/pixelplace-b8fac.appspot.com/o/1024px-Faenza-avatar-default-symbolic.svg.png?alt=media&token=986532b2-c109-4faf-b607-30ce2a1e1ff8",
                 likes: [],
-                comments: [],
             });
             navigate("/posts");
         } catch (err) {

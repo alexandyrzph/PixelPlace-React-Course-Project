@@ -16,8 +16,8 @@ import { BeatLoader } from "react-spinners";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-    const { isLoading } = useUserAuth();
-    console.log(isLoading);
+    const { isLoading, user } = useUserAuth();
+    
     if (!isLoading) {
         return (
             <div className="App">

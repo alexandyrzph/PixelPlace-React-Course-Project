@@ -23,7 +23,6 @@ const PostItem = ({
 
     useEffect(() => {
         const handleOutsideClick = (event) => {
-            // debugger;
             if (dropdownShow) {
                 if (!menuRef.current.contains(event.target)) {
                     if (!dropdownShow) return;
@@ -43,12 +42,12 @@ const PostItem = ({
     };
 
     return (
-        <div className="break-inside mb-4 shadow-md rounded-lg shadow-gray-300">
-            <div className=" bg-white rounded-lg border-2 border-neu-black">
-                <div className="p-2 flex justify-between items-center">
-                    <div className="flex items-center">
+        <div className="break-inside mb-4 shadow-xl lg:hover:-translate-y-[1px] duration-300">
+            <div className="bg-white rounded-lg border-2 border-neu-black">
+                <div className="flex justify-between items-center">
+                    <div className="flex p-2 items-center">
                         <img
-                            className="w-10 h-10 object-cover object-center rounded-full mr-4"
+                            className="w-8 h-8 object-cover object-center rounded-full mr-3"
                             src={ownerAvatarURL}
                             alt=""
                         />
@@ -57,6 +56,7 @@ const PostItem = ({
                     {user && user.uid === ownerId ? (
                         <div ref={menuRef} className="relative">
                             <HiDotsHorizontal
+                                className="mr-2 hover:bg-slate-200 rounded-full text-2xl"
                                 cursor={"pointer"}
                                 onClick={() => setDropdownShow(!dropdownShow)}
                             />

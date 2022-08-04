@@ -1,20 +1,23 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { browserLocalPersistence, getAuth, setPersistence } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-    appId: process.env.REACT_APP_FIREBASE_APP_ID,
-    measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
+    apiKey: "AIzaSyCW_cmKgEljXcoCdHbpMJggAhJ1O0x_dCE",
+    authDomain: "pixelplace-b8fac.firebaseapp.com",
+    projectId: "pixelplace-b8fac",
+    storageBucket: "pixelplace-b8fac.appspot.com",
+    messagingSenderId: "109515736575",
+    appId: "1:109515736575:web:2feff28d2566dfe9a5d3ca",
+    measurementId: "G-CTSSLP5979",
 };
 
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
+setPersistence(auth, browserLocalPersistence)
+    .then()
+    .catch((err) => console.log(err));
 export const storage = getStorage(app);
 export default app;
