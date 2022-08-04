@@ -1,23 +1,18 @@
-import { collection, onSnapshot, query, where } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { collection, query, where } from "firebase/firestore";
+import { useCollection } from "react-firebase-hooks/firestore";
+import { BeatLoader } from "react-spinners";
 import { useUserAuth } from "../../context/UserAuthContext";
 import { db } from "../../firebase";
 import PostItem from "../PostItem/PostItem";
 
 const Profile = () => {
     const { user } = useUserAuth();
-    const [posts, setPosts] = useState([]);
-    useEffect(() => {
-        const q = query(collection(db, "Posts"), where("ownerId", "==", user.uid));
-        onSnapshot(
-            q,
-            (snapshot) => {
-                const posts = snapshot.docs.map((post) => ({ postId: post.id, ...post.data() }));
-                setPosts(posts);
-            },
-            (err) => console.log(err)
-        );
-    }, [user]);
+    const [values, loading] = useCollection(
+        query(collection(db, "Posts"), where("ownerId", "==", user.uid)),
+        {
+            snapshotListenOptions: { includeMetadataChanges: true },
+        }
+    );
 
     return (
         <div>
@@ -33,11 +28,18 @@ const Profile = () => {
                         <h2 className="text-2xl mt-1">Email: {user.email}</h2>
                     </div>
                 </div>
-                <h2 className="text-4xl mb-4 mt-4 font-bold">Your Posts:</h2>
+                <h2 className="text-4xl mb-2 mt-6 font-bold">Your Posts:</h2>
                 <div className="masonry sm:masonry-sm md:masonry-md xl:masonry-lg">
-                    {posts.map((post) => (
-                        <PostItem key={post.postId} {...post} user={user} />
-                    ))}
+                    {values &&
+                        values.docs.map((post) => (
+                            <PostItem key={post.id} {...post.data()} postId={post.id} user={user} />
+                        ))}
+                    {loading && (
+                        <div className="flex justify-center items-center h-screen bg-neu-white">
+                            <BeatLoader size={"5rem"} color={"#1e1e1e"} />
+                        </div>
+                    )}
+                    {values?.empty && (<p className="text-2xl">You don't have any posts yet</p>)}
                 </div>
             </div>
         </div>
