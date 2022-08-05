@@ -147,37 +147,39 @@ const PostDetails = () => {
                                         {...comment}
                                         key={uuidv4()}
                                         postId={postId}
-                                        currentUserId={user.uid}
+                                        currentUserId={user?.uid}
                                     />
                                 ))
                             )}
                         </div>
                     </div>
                     <div className="flex flex-wrap mt-6 items-center gap-3">
-                        <form
-                            onSubmit={handleSubmit}
-                            className="flex flex-wrap w-full items-center gap-2"
-                        >
-                            <img
-                                src={user.photoURL}
-                                className="w-9 h-9 items-center object-cover object-center rounded-full"
-                                alt="user-profile"
-                            />
-                            <input
-                                className="flex-1 bg-gray-100 border-neu-white outline-none border-2 p-2 rounded-md focus:border-gray-500"
-                                type="text"
-                                placeholder="Add a comment"
-                                value={comment}
-                                onChange={(e) => setComment(e.target.value)}
-                            />
-                            <button
-                                type="button"
-                                className="bg-neu-yellow text-neu-black border-2 border-neu-black hover:shadow-[2px_2px_2px] duration-75 rounded-md px-6 py-2 font-semibold text-base outline-none"
-                                onClick={handleSubmit}
+                        {user && (
+                            <form
+                                onSubmit={handleSubmit}
+                                className="flex flex-wrap w-full items-center gap-2"
                             >
-                                Send
-                            </button>
-                        </form>
+                                <img
+                                    src={user.photoURL}
+                                    className="w-9 h-9 items-center object-cover object-center rounded-full"
+                                    alt="user-profile"
+                                />
+                                <input
+                                    className="flex-1 bg-gray-100 border-neu-white outline-none border-2 p-2 rounded-md focus:border-gray-500"
+                                    type="text"
+                                    placeholder="Add a comment"
+                                    value={comment}
+                                    onChange={(e) => setComment(e.target.value)}
+                                />
+                                <button
+                                    type="button"
+                                    className="bg-neu-yellow text-neu-black border-2 border-neu-black hover:shadow-[2px_2px_2px] duration-75 rounded-md px-6 py-2 font-semibold text-base outline-none"
+                                    onClick={handleSubmit}
+                                >
+                                    Send
+                                </button>
+                            </form>
+                        )}
                     </div>
                     <img
                         className="hidden lg:block absolute bottom-5 -right-20 opacity-10 -z-10 w-[200px]"
