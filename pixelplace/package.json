@@ -19,7 +19,6 @@
     "react-spinners": "^0.13.3",
     "react-toastify": "^9.0.7",
     "uuid": "^8.3.2",
-    "vue": "^2.7.8",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
   },
