@@ -5,8 +5,7 @@ import { AiOutlineCloudUpload } from "react-icons/ai";
 import { BsShieldFillExclamation } from "react-icons/bs";
 import { Formik, Form, Field } from "formik";
 import { SignUpSchema } from "../../utils/formValidators";
-import { addDoc, doc } from "firebase/firestore";
-import { db, storage } from "../../firebase";
+import { storage } from "../../firebase";
 import { handleFirebaseError } from "../../utils/firebaseErrorHandler";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
@@ -55,10 +54,6 @@ const SignUp = () => {
             await updateProfile(user, {
                 photoURL: url,
                 displayName: username,
-            });
-            await addDoc(doc(db, "Users", res.user.uid), {
-                username,
-                email,
             });
             navigate("/");
         } catch (err) {

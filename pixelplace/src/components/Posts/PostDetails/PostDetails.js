@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { ToastContainer } from "react-toastify";
-import { getPostById } from "../../../api/PostsAPI";
 import { toastError } from "../../../utils/Toast";
 import { db } from "../../../firebase";
 import {
@@ -19,24 +18,19 @@ import {
 import { uuidv4 } from "@firebase/util";
 import Comment from "../../Comment/Comment";
 import { Transition } from "@tailwindui/react";
+import { useDocument } from "react-firebase-hooks/firestore";
 
 const PostDetails = () => {
     const { user } = useUserAuth();
     const { postId } = useParams();
     const [comment, setComment] = useState("");
     const [comments, setComments] = useState([]);
-    const [post, setPost] = useState();
     const [dropdownShow, setDropdownShow] = useState(false);
     const menuRef = useRef(null);
     const navigate = useNavigate();
-
-    useEffect(() => {
-        getPostById(postId)
-            .then((data) => {
-                setPost(data);
-            })
-            .catch((err) => console.log(err));
-    }, [postId]);
+    const [post, loading] = useDocument(doc(db, "Posts", postId), {
+        snapshotListenOptions: { includeMetadataChanges: true },
+    });
 
     useEffect(() => {
         onSnapshot(
@@ -73,20 +67,23 @@ const PostDetails = () => {
     };
 
     return (
-        <div className="">
+        <div>
             <ToastContainer />
             <div className="relative flex flex-col max-w-md sm:max-w-md md:max-w-xl mx-auto h-screen mt-16">
                 <div className="mx-auto max-h-[450px] w-full">
-                    <img
-                        src={post?.image}
-                        alt="img"
-                        className="border-2 bg-white h-full w-full object-cover object-center border-neu-black border-b-none rounded-t-xl rounded-b-none"
-                    />
+                    {!loading && (
+                        <img
+                            src={post?.data().image}
+                            alt="img"
+                            className="border-2 bg-white h-full w-full object-cover object-center border-neu-black border-b-none rounded-t-xl rounded-b-none"
+                        />
+                    )}
                 </div>
                 <div className="relative border-2 border-t-none rounded-b-lg border-neu-black bg-white p-4">
                     <div className="flex justify-between">
-                        <h1 className="text-xl font-neu">{post?.title}</h1>
-                        {user && user.uid === post?.ownerId ? (
+                        <h1 className="text-xl font-neu">{post?.data().title}</h1>
+
+                        {user && user.uid === post?.data().ownerId ? (
                             <div ref={menuRef} className="relative">
                                 <HiDotsHorizontal
                                     cursor={"pointer"}
@@ -121,23 +118,23 @@ const PostDetails = () => {
                             </div>
                         ) : null}
                     </div>
-                    <div className="text-lg mb-2">{post?.description}</div>
+                    <div className="text-lg mb-2">{post?.data().description}</div>
 
                     <div className="flex justify-between mt-4">
                         <div className="flex justify-center items-center gap-6">
                             <img
                                 className="border-2 border-neu-black  cursor-pointer inline-block h-9 w-9 rounded-full ring-2 ring-white"
-                                src={post?.ownerAvatarURL}
+                                src={post?.data().ownerAvatarURL}
                                 alt="avatarImage"
                             />
                             <p className="border-2 px-4 rounded-full text-gray-300 bg-neu-black">
-                                {post?.category}
+                                {post?.data().category}
                             </p>
                         </div>
-                        <p>@{post?.ownerUsername}</p>
+                        <p>@{post?.data().ownerUsername}</p>
                     </div>
                     <p className="text-md mt-2 mb-4">
-                        Likes: <span className="font-bold">{post?.likes.length}</span>
+                        Likes: <span className="font-bold">{post?.data().likes.length}</span>
                     </p>
                     <h2 className="mt-5 text-lg">Comments:</h2>
                     <div className="max-h-370 overflow-y-auto">
