@@ -11,6 +11,7 @@ PixelPlace is a place for people where they can share their art and browse art w
     -   Home Page
     -   Login Page
     -   Register Page
+    -   Browsing Posts and post details but can't like, comment, create or edit posts
 -   ### Private Part (for authenticated users)
     -   Posts Page with feature to like others posts
     -   Post Details page where you can see more and also leave a comment
