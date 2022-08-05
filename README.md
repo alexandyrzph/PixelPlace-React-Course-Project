@@ -37,8 +37,8 @@ PixelPlace is a place for people where they can share their art and browse art w
 
 > ## Guide to start the application
 
-To start the application simply clone the repo or download it.
+### To start the application simply clone the repo or download it.
 
--   ### In the project's folder open terminal and type `npm install` or `npm i`.
--   ### After the dependencies are installed successfully to run the application go to the project's directory by typing `cd pixelplace` or if your already are in the directory just type `npm run start`
--   ### Your application should be running on `http://localhost:3000`.
+-   #### Open terminal in the project's directory and type `npm install` or `npm i`.
+-   #### After the dependencies are installed successfully to run the application go to the project's directory by typing `cd pixelplace` or if your already are in the directory just type `npm run start`
+-   #### Your application should be running on `http://localhost:3000`.
