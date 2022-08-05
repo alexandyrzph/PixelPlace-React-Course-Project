@@ -1,11 +1,11 @@
-import { useUserAuth } from "../../context/UserAuthContext";
+import { useUserAuth } from "../../../context/UserAuthContext";
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { ToastContainer } from "react-toastify";
-import { getPostById } from "../../api/PostsAPI";
-import { toastError } from "../../utils/Toast";
-import { db } from "../../firebase";
+import { getPostById } from "../../../api/PostsAPI";
+import { toastError } from "../../../utils/Toast";
+import { db } from "../../../firebase";
 import {
     addDoc,
     collection,
@@ -17,7 +17,7 @@ import {
     serverTimestamp,
 } from "firebase/firestore";
 import { uuidv4 } from "@firebase/util";
-import Comment from "../Comment/Comment";
+import Comment from "../../Comment/Comment";
 import { Transition } from "@tailwindui/react";
 
 const PostDetails = () => {

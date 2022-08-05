@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { deleteDoc, doc } from "firebase/firestore";
-import { db } from "../../firebase";
+import { db } from "../../../firebase";
 import { Transition } from "@tailwindui/react";
-import Like from "../Like/Like";
+import Like from "../../Like/Like";
 
 const PostItem = ({
     ownerUsername,

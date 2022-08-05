@@ -3,7 +3,7 @@ import { useCollection } from "react-firebase-hooks/firestore";
 import { BeatLoader } from "react-spinners";
 import { useUserAuth } from "../../context/UserAuthContext";
 import { db } from "../../firebase";
-import PostItem from "../PostItem/PostItem";
+import PostItem from "../Posts/PostItem/PostItem";
 
 const Profile = () => {
     const { user } = useUserAuth();
@@ -39,7 +39,7 @@ const Profile = () => {
                             <BeatLoader size={"5rem"} color={"#1e1e1e"} />
                         </div>
                     )}
-                    {values?.empty && (<p className="text-2xl">You don't have any posts yet</p>)}
+                    {values?.empty && <p className="text-2xl">You don't have any posts yet</p>}
                 </div>
             </div>
         </div>
