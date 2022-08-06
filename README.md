@@ -5,6 +5,8 @@
 PixelPlace is a place for people where they can share their art and browse art wallpapers from other people. The application uses Firebase services such as Firebase Authentication, Firestore Database, Firebase Storage.
 <br />
 
+### Application currently deployed on Firebase - <b>[PixelPlace](https://pixelplace-b8fac.web.app/)</b>
+
 > ## Application structure
 
 -   ### Public Part (for unauthenticated users)
