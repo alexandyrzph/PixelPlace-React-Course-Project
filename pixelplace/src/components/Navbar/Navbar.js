@@ -52,9 +52,9 @@ const Navbar = () => {
                                     <MdOutlineExplore size={"1.8rem"} />
                                 </li>
                             </Link>
-                            <Link className="" to="post-create">
+                            <Link to="post-create">
                                 <li className="hover:-translate-y-[1px]  bg-white text-xl hover:shadow-[2px_2px_0px_black] duration-100 cursor-pointer rounded-md border-black border-2">
-                                    <AiOutlinePlus size={"1.8rem"} />
+                                    <AiOutlinePlus className="p-1" size={"1.8rem"} />
                                 </li>
                             </Link>
                             <li className="relative z-[1000]">

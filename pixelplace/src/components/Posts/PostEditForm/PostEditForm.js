@@ -57,7 +57,11 @@ const PostEditForm = () => {
     };
 
     const handleSubmit = async (values) => {
-        const url = await uploadImage(values.image);
+        let url = imageReceived;
+        if (values.image != imageReceived) {
+            url = await uploadImage(values.image);
+        }
+
         try {
             await updateDoc(doc(db, `Posts`, postId), {
                 ...values,
