@@ -14,14 +14,10 @@ import { ToastContainer } from "react-toastify";
 
 const SignUp = () => {
     const { user, signUp } = useUserAuth();
-    const [error, setError] = useState("");
     const [image, setImage] = useState();
     const [preview, setPreview] = useState();
     const navigate = useNavigate();
     const fileRef = useRef(null);
-    if (error) {
-        toastError(error);
-    }
 
     useEffect(() => {
         if (image) {
@@ -42,7 +38,7 @@ const SignUp = () => {
             });
             return getDownloadURL(res.ref);
         } catch (err) {
-            console.log(err);
+            toastError(err.message);
         }
     };
 
@@ -57,7 +53,7 @@ const SignUp = () => {
             });
             navigate("/");
         } catch (err) {
-            handleFirebaseError(err.message, setError);
+            handleFirebaseError(err.message, toastError);
         }
     };
 
@@ -78,8 +74,8 @@ const SignUp = () => {
             onSubmit={(values) => handleSubmit(values)}
         >
             {({ errors, touched, setFieldValue }) => (
-                <Form className="w-full mx-auto  h-screen pt-[100px] max-w-xs sm:max-w-sm md:max-w-lg lg:max-w-3xl">
-                    <h1 className="relative text-[100px] text-5xl -z-10 -mb-[10px] font-logo">
+                <Form className="w-full mx-auto h-screen pt-[100px] max-w-xs sm:max-w-sm md:max-w-lg lg:max-w-3xl">
+                    <h1 className="relative text-[80px] md:text-[120px] text-5xl -z-10 -mb-[10px] font-logo">
                         Sign <span className="text-stroke text-white">Up</span>
                     </h1>
                     <ToastContainer />
@@ -87,7 +83,7 @@ const SignUp = () => {
                         <Field
                             type="text"
                             name="username"
-                            className={`border-2 mt-3 w-full outline-none bg-white focus:shadow-[2px_2px_2px] duration-150 rounded-md ${
+                            className={`border-2 mt-3 w-full outline-none bg-white focus:shadow-[2px_2px_2px] duration-150 rounded-sm ${
                                 touched.username && errors.username
                                     ? "border-red-500 focus:shadow-[2px_2px_2px] focus:shadow-red-500 "
                                     : "border-neu-black"
@@ -107,7 +103,7 @@ const SignUp = () => {
                                     e.preventDefault();
                                     fileRef.current.click();
                                 }}
-                                className={`relative z-[9] flex flex-col justify-center items-center w-full h-64 bg-white rounded-lg border-2 ${
+                                className={`relative z-[9] flex flex-col justify-center items-center w-full h-64 bg-white rounded-sm border-2 ${
                                     touched.image && errors.image
                                         ? `border-red-600`
                                         : "border-neu-black"
@@ -165,7 +161,7 @@ const SignUp = () => {
                         <Field
                             type="email"
                             name="email"
-                            className={`border-2 mt-3 w-full outline-none bg-white focus:shadow-[2px_2px_2px] duration-150 rounded-md ${
+                            className={`border-2 mt-3 w-full outline-none bg-white focus:shadow-[2px_2px_2px] duration-150 rounded-sm ${
                                 touched.email && errors.email
                                     ? "border-red-500 focus:shadow-[2px_2px_2px] focus:shadow-red-500 "
                                     : "border-neu-black"
@@ -182,7 +178,7 @@ const SignUp = () => {
                             autoComplete="on"
                             type="password"
                             name="password"
-                            className={`border-2 mt-3 w-full outline-none bg-white focus:shadow-[2px_2px_2px] duration-150 rounded-md ${
+                            className={`border-2 mt-3 w-full outline-none bg-white focus:shadow-[2px_2px_2px] duration-150 rounded-sm ${
                                 touched.password && errors.password
                                     ? "border-red-500 focus:shadow-[2px_2px_2px] focus:shadow-red-500 "
                                     : "border-neu-black"
@@ -199,7 +195,7 @@ const SignUp = () => {
                             autoComplete="on"
                             type="password"
                             name="repass"
-                            className={`border-2 mt-3 w-full outline-none bg-white focus:shadow-[2px_2px_2px] duration-150 rounded-md ${
+                            className={`border-2 mt-3 w-full outline-none bg-white focus:shadow-[2px_2px_2px] duration-150 rounded-sm ${
                                 touched.repass && errors.repass
                                     ? "border-red-500 focus:shadow-[2px_2px_2px] focus:shadow-red-500 "
                                     : "border-neu-black"
@@ -215,7 +211,7 @@ const SignUp = () => {
                         <div className="w-full mt-4">
                             <button
                                 type="submit"
-                                className="relative flex-grow-1 w-full lg:w-full hover:shadow-neu-shadow hover:-translate-y-1 duration-200 border-2 border-neu-black px-6 py-3 rounded-lg bg-neu-yellow font-bold"
+                                className="relative flex-grow-1 w-full lg:w-full hover:shadow-neu-shadow hover:-translate-y-1 duration-200 border-2 border-neu-black px-6 py-3 rounded-sm bg-neu-yellow font-bold"
                             >
                                 Sign Up
                             </button>

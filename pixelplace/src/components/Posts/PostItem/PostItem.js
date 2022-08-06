@@ -43,7 +43,7 @@ const PostItem = ({
 
     return (
         <div className="break-inside mb-4 lg:hover:-translate-y-[1px] duration-300">
-            <div className="bg-white rounded-lg border-2 border-neu-black">
+            <div className="bg-white rounded-sm border-2 border-neu-black">
                 <div className="flex justify-between items-center">
                     <div className="flex p-2 items-center">
                         <img
@@ -110,7 +110,7 @@ const PostItem = ({
 
                     <div className="inline-flex items-center">
                         <Link to={`/posts/${postId}`}>
-                            <button className="relative flex-grow-1 w-full lg:w-full hover:shadow-neu-shadow hover:-translate-y-1 duration-200 border-2 outline-none border-neu-black px-6 py-3 rounded-lg bg-neu-yellow font-bold">
+                            <button className="relative flex-grow-1 w-full lg:w-full hover:shadow-neu-shadow hover:-translate-y-1 duration-200 border-2 outline-none border-neu-black px-6 py-3 rounded-sm bg-neu-yellow font-bold">
                                 Read More
                             </button>
                         </Link>
