@@ -17,7 +17,10 @@ const Posts = () => {
     );
 
     return (
-        <div className="relative max-w-md px-1 md:px-0 sm:max-w-lg md:max-w-xl lg:max-w-3xl xl:max-w-5xl 2xl:max-w-7xl mx-auto w-full h-screen py-16">
+        <div
+            style={{   }}
+            className="relative overflow-x-clip max-w-md px-1 md:px-0 sm:max-w-lg md:max-w-xl lg:max-w-3xl xl:max-w-5xl 2xl:max-w-7xl mx-auto w-full h-screen py-16"
+        >
             {loading && (
                 <div className="flex justify-center items-center h-screen bg-neu-white">
                     <BeatLoader size={"5rem"} color={"#1e1e1e"} />

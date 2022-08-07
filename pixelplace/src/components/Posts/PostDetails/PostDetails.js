@@ -75,11 +75,11 @@ const PostDetails = () => {
                         <img
                             src={post?.data().image}
                             alt="img"
-                            className="border-2 bg-white h-full w-full object-cover object-center border-neu-black border-b-none rounded-t-xl rounded-b-none"
+                            className="border-2 border-b-none bg-white h-full w-full object-cover object-center border-neu-black"
                         />
                     )}
                 </div>
-                <div className="relative border-2 border-t-none rounded-b-lg border-neu-black bg-white p-4">
+                <div className="relative border-2 border-t-none border-neu-black bg-white p-4">
                     <div className="flex justify-between">
                         <h1 className="text-xl font-neu">{post?.data().title}</h1>
 
@@ -173,7 +173,7 @@ const PostDetails = () => {
                                 />
                                 <button
                                     type="button"
-                                    className="bg-neu-yellow text-neu-black border-2 border-neu-black hover:shadow-[2px_2px_2px] duration-75 rounded-md px-6 py-2 font-semibold text-base outline-none"
+                                    className="bg-neu-yellow text-neu-black border-2 border-neu-black hover:shadow-[2px_2px_2px] duration-75 px-6 py-2 font-semibold text-base outline-none"
                                     onClick={handleSubmit}
                                 >
                                     Send

@@ -36,7 +36,7 @@ const Home = () => {
                             </Link>
                         ) : (
                             <Link className="w-full" to="/post-create">
-                                <button className="relative font-mono flex-grow-1 w-full lg:w-full hover:shadow-neu-shadow hover:-translate-y-1 duration-200 border-2 border-neu-black px-6 py-3 rounded-lg bg-white font-bold">
+                                <button className="relative font-mono flex-grow-1 w-full lg:w-full hover:shadow-neu-shadow hover:-translate-y-1 duration-200 border-2 border-neu-black px-6 py-3 rounded-sm bg-white font-bold">
                                     Create Post
                                 </button>
                             </Link>

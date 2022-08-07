@@ -12,7 +12,7 @@ const Comment = ({ photoURL, displayName, comment, commentId, uid, currentUserId
     };
 
     return (
-        <div className="flex bg-slate-200 rounded-full rounded-r-xl gap-2 mb-2 items-center">
+        <div className="flex bg-gray-100  rounded-lg gap-2 mb-2 items-center">
             <ToastContainer />
             <img
                 src={photoURL}
@@ -27,7 +27,7 @@ const Comment = ({ photoURL, displayName, comment, commentId, uid, currentUserId
                 <HiX
                     cursor={"pointer"}
                     onClick={deleteCommentHandler}
-                    className="hover:bg-slate-300 text-lg text-gray-500 hover:text-black rounded-full duration-100"
+                    className="hover:bg-slate-300 mr-2 text-lg text-gray-500 hover:text-black rounded-full duration-100"
                 />
             ) : null}
         </div>

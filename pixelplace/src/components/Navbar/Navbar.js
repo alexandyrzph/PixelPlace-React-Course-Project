@@ -53,7 +53,7 @@ const Navbar = () => {
                                 </li>
                             </Link>
                             <Link to="post-create">
-                                <li className="hover:-translate-y-[1px]  bg-white text-xl hover:shadow-[2px_2px_0px_black] duration-100 cursor-pointer rounded-md border-black border-2">
+                                <li className="hover:-translate-y-[1px]  bg-white text-xl hover:shadow-[2px_2px_0px_black] duration-100 cursor-pointer rounded-sm border-black border-2">
                                     <AiOutlinePlus className="p-1" size={"1.8rem"} />
                                 </li>
                             </Link>
@@ -64,7 +64,7 @@ const Navbar = () => {
                                         onClick={() => setShow(!show)}
                                     >
                                         <img
-                                            className="w-[35px] h-[35px] translate-y-[2px] bg-white items-center rounded-md border-2 border-neu-black"
+                                            className="w-[35px] h-[35px] translate-y-[2px] bg-white items-center rounded-sm border-2 border-neu-black"
                                             src={
                                                 user.photoURL ??
                                                 "https://firebasestorage.googleapis.com/v0/b/pixelplace-b8fac.appspot.com/o/1024px-Faenza-avatar-default-symbolic.svg.png?alt=media&token=986532b2-c109-4faf-b607-30ce2a1e1ff8"

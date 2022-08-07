@@ -96,7 +96,7 @@ const PostEditForm = () => {
                         <div className="flex flex-wrap">
                             <Field
                                 name="title"
-                                className={`border-2 mt-3 w-full outline-none bg-white focus:shadow-[2px_2px_0px] duration-150 rounded-md ${
+                                className={`border-2 mt-3 w-full outline-none bg-white focus:shadow-[2px_2px_0px] duration-150 rounded-sm ${
                                     touched.title && errors.title
                                         ? "border-red-500 focus:shadow-[2px_2px_0px] focus:shadow-red-500 "
                                         : "border-neu-black"
@@ -113,7 +113,7 @@ const PostEditForm = () => {
                             <Field
                                 type="text"
                                 name="description"
-                                className={`border-2 mt-3 w-full outline-none bg-white focus:shadow-[2px_2px_0px] duration-150 rounded-md ${
+                                className={`border-2 mt-3 w-full outline-none bg-white focus:shadow-[2px_2px_0px] duration-150 rounded-sm ${
                                     touched.description && errors.description
                                         ? "border-red-500 focus:shadow-[2px_2px_0px] focus:shadow-red-500 "
                                         : "border-neu-black"
@@ -129,7 +129,7 @@ const PostEditForm = () => {
                             <Field
                                 type="text"
                                 name="category"
-                                className={`border-2 mt-3 w-full outline-none bg-white focus:shadow-[2px_2px_0px] duration-150 rounded-md ${
+                                className={`border-2 mt-3 w-full outline-none bg-white focus:shadow-[2px_2px_0px] duration-150 rounded-sm ${
                                     touched.category && errors.category
                                         ? "border-red-500 focus:shadow-[2px_2px_0px] focus:shadow-red-500 "
                                         : "border-neu-black"
@@ -150,7 +150,7 @@ const PostEditForm = () => {
                                         e.preventDefault();
                                         fileRef.current.click();
                                     }}
-                                    className={`relative z-[9] flex flex-col justify-center items-center w-full h-64 bg-white rounded-lg border-2 ${
+                                    className={`relative z-[9] flex flex-col justify-center items-center w-full h-64 bg-white rounded-sm border-2 ${
                                         touched.image && errors.image
                                             ? `border-red-600`
                                             : "border-neu-black"
@@ -208,7 +208,7 @@ const PostEditForm = () => {
                             <div className="mt-4 w-full">
                                 <button
                                     type="Submit"
-                                    className="relative flex-grow-1 w-full lg:w-full hover:shadow-neu-shadow hover:-translate-y-1 duration-200 border-2 outline-none border-neu-black px-6 py-3 rounded-lg bg-neu-yellow font-bold"
+                                    className="relative flex-grow-1 w-full lg:w-full hover:shadow-neu-shadow hover:-translate-y-1 duration-200 border-2 outline-none border-neu-black px-6 py-3 rounded-sm bg-neu-yellow font-bold"
                                 >
                                     Submit
                                 </button>
