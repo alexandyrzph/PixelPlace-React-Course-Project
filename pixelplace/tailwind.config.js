@@ -6,7 +6,6 @@ module.exports = {
     content: ["./src/**/*.{js,jsx,ts,tsx}"],
     theme: {
         extend: {
-            
             boxShadow: {
                 "neu-shadow": "2px 2px 0px black",
             },
