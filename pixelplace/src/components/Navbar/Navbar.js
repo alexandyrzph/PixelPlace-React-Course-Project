@@ -48,7 +48,7 @@ const Navbar = () => {
                     {user ? (
                         <>
                             <Link to="posts">
-                                <li className="hover:-translate-y-[1px] bg-white text-xl hover:shadow-[2px_2px_0px_black] duration-100 cursor-pointer rounded-md border-black border-2">
+                                <li className="hover:-translate-y-[1px] bg-white text-xl hover:shadow-[2px_2px_0px_black] duration-100 cursor-pointer rounded-sm border-black border-2">
                                     <MdOutlineExplore size={"1.8rem"} />
                                 </li>
                             </Link>

@@ -107,10 +107,9 @@ const PostItem = ({
                             <Like postId={postId} likes={likes} />
                         </div>
                     )}
-
-                    <div className="inline-flex items-center">
+                    <div className="flex">
                         <Link to={`/posts/${postId}`}>
-                            <button className="relative flex-grow-1 w-full lg:w-full hover:shadow-neu-shadow hover:-translate-y-1 duration-200 border-2 outline-none border-neu-black px-6 py-3 rounded-sm bg-neu-yellow font-bold">
+                            <button className="flex-grow-1 w-full lg:w-full hover:shadow-neu-shadow hover:-translate-y-1 duration-200 border-2 outline-none border-neu-black px-6 py-3 rounded-sm bg-neu-yellow font-bold">
                                 Read More
                             </button>
                         </Link>

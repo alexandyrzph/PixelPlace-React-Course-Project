@@ -57,7 +57,10 @@ function App() {
         );
     } else {
         return (
-            <div className="flex justify-center items-center h-screen bg-neu-white">
+            <div className="flex flex-col -mt-10 justify-center items-center h-screen bg-neu-white">
+                <h1 className=" font-logo text-[70px]">
+                    Pixel<span className="text-stroke text-neu-white">Place</span>
+                </h1>
                 <BeatLoader size={"5rem"} color={"#1e1e1e"} />
             </div>
         );

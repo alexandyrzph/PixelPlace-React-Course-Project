@@ -18,7 +18,6 @@ const Posts = () => {
 
     return (
         <div
-            style={{   }}
             className="relative overflow-x-clip max-w-md px-1 md:px-0 sm:max-w-lg md:max-w-xl lg:max-w-3xl xl:max-w-5xl 2xl:max-w-7xl mx-auto w-full h-screen py-16"
         >
             {loading && (
