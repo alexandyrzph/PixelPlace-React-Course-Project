@@ -10,6 +10,7 @@ import {
     ProtectedRoute,
     Home,
     Posts,
+    NotFound,
 } from "./components/index";
 import { useUserAuth } from "./context/UserAuthContext";
 import { BeatLoader } from "react-spinners";
@@ -52,6 +53,7 @@ function App() {
                             </ProtectedRoute>
                         }
                     />
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
             </div>
         );

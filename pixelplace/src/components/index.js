@@ -6,6 +6,7 @@ export { default as SignUp } from "./Auth/SignUp";
 export { default as Home } from "./Home/Home";
 export { default as Like } from "./Like/Like";
 export { default as Navbar } from "./Navbar/Navbar";
+export { default as NotFound } from "./NotFound/NotFound";
 export { default as PostDetails } from "./Posts/PostDetails/PostDetails";
 export { default as PostItem } from "./Posts/PostItem/PostItem";
 export { default as Posts } from "./Posts/Posts";
