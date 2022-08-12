@@ -29,7 +29,7 @@ const SignIn = () => {
             validationSchema={SignInSchema}
             onSubmit={(values) => handleSubmit(values)}
         >
-            {({ errors, touched }) => (
+            {({ errors, touched, isSubmitting }) => (
                 <Form className="relative w-full mx-auto h-screen pt-[100px] max-w-xs sm:max-w-sm md:max-w-lg lg:max-w-3xl">
                     <h1 className="relative text-[80px] md:text-[120px] text-5xl -z-10 -mb-[10px] font-logo">
                         Sign <span className="text-stroke text-white">In</span>
@@ -71,6 +71,7 @@ const SignIn = () => {
                         <div className="mt-4 w-full">
                             <button
                                 type="submit"
+                                disabled={isSubmitting}
                                 className="relative flex-grow-1 w-full lg:w-full hover:shadow-neu-shadow hover:-translate-y-1 duration-200 border-2 border-neu-black px-6 py-3 rounded-sm bg-neu-yellow font-bold"
                             >
                                 Log in

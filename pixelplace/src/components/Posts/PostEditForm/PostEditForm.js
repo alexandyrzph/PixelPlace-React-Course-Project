@@ -88,7 +88,7 @@ const PostEditForm = () => {
                 validationSchema={CreateEditPostSchema}
                 onSubmit={(values) => handleSubmit(values)}
             >
-                {({ values, touched, errors, setFieldValue }) => (
+                {({ values, touched, errors, isSubmitting, setFieldValue }) => (
                     <Form className="w-full mx-auto  h-screen pt-[100px] max-w-xs sm:max-w-sm md:max-w-lg lg:max-w-3xl">
                         <h1 className="relative text-[100px] text-5xl -z-10 -mb-[10px] font-logo">
                             Edit <span className="text-stroke text-white">Post</span>
@@ -208,6 +208,7 @@ const PostEditForm = () => {
                             <div className="mt-4 w-full">
                                 <button
                                     type="Submit"
+                                    disabled={isSubmitting}
                                     className="relative flex-grow-1 w-full lg:w-full hover:shadow-neu-shadow hover:-translate-y-1 duration-200 border-2 outline-none border-neu-black px-6 py-3 rounded-sm bg-neu-yellow font-bold"
                                 >
                                     Submit
